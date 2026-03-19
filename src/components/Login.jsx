@@ -22,7 +22,7 @@ const Login = () => {
       )
       // console.log(res.data)
       dispatch(addUser(res.data.data)) // add data to store
-      return navigate("/")
+      return navigate("/feed")
 
     } catch(err){
         console.error('There was an error logging in!', err);
