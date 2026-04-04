@@ -9,6 +9,7 @@ import { BASE_URL } from '../utils/constants';
 const Login = () => {
   const [emailId, setEmail] = useState('manipal@gmail.com')
   const [password, setPassword] = useState('Manipal@123')
+  const [error, setError] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -25,7 +26,8 @@ const Login = () => {
       return navigate("/feed")
 
     } catch(err){
-        console.error('There was an error logging in!', err);
+        setError(err.response?.data || "Error: Invalid credentials. Please try again.")
+        
       };
 
   }
@@ -55,8 +57,10 @@ const Login = () => {
 
           </label>
 
+          <p className='text-red-500 text-[16px]'>{error}</p>
+
           <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+            <button className="btn btn-primary text-[18px]" onClick={handleLogin}>Login</button>
           </div>
         </div>
       </div>
