@@ -4,9 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Body from "./components/Body"
 import Login from "./components/Login"
 import Profile from "./components/Profile"
+import EditProfile from "./components/EditProfile"
 import Feed from "./components/Feed"
+import Signup from "./components/Signup"
 import DataComponent from "./components/Error"
-import { BASE_URL } from "./utils/constants"
 function App() {
 
 
@@ -18,8 +19,9 @@ function App() {
 
       <Route path="/login" element = {<Login/> } /> 
       <Route path="/*" element = {<DataComponent/> } /> 
-      <Route path="/profile" element = {<Profile/> } /> 
+      <Route path="/profile/view" element = {<EditProfile/> } /> 
       <Route path="/feed" element = {<Feed/> } /> 
+      <Route path="/signup" element = {<Signup/> } />
 
       </Route>
     </Routes>

@@ -21,6 +21,11 @@ const NavBar = () => {
 
         } catch (err) {
             console.error("Logout error:", err)
+            if (err.status == 400 || err.status == 401) {
+                dispatch(removeUser())
+                return navigate("/login")
+                
+            }
 
         }
 
@@ -33,20 +38,20 @@ const NavBar = () => {
 
     return (
 
-        <div className="navbar bg-green-700 shadow-sm">
+        <div className="navbar bg-emerald-700 shadow-sm">
             <div className="flex-1">
                 {user &&
-                    <Link to="/feed" className="btn btn-ghost text-xl">🚀 DevTinder</Link>
+                    <Link to="/feed" className="btn btn-ghost text-[18px]">🚀 DevTinder</Link>
                 }
             </div>
             <div className="flex">
-                <a className="btn btn-ghost text-xl">Home</a>
+                <a className="btn btn-ghost text-[18px] ">Home</a>
             </div>
             <div className="flex">
-                <a className="btn btn-ghost text-xl">Login</a>
+                <a className="btn btn-ghost text-[18px]">Login</a>
             </div>
             {user && (<div className="flex gap-2">
-                <p className="my-3 text-xl">Welcome {user.Fname}</p>
+                <p className="my-3 text-[20px] text-black font-bold px-3">Welcome {user.Fname}</p>
                 <div className="dropdown dropdown-end mx-5">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
@@ -58,9 +63,9 @@ const NavBar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li>
-                            <Link to="/profile" className="justify-between">
+                            <Link to="/profile/view" className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
                             </Link>

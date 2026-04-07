@@ -13,22 +13,22 @@ const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     // Handle login logic here
-    try{ 
+    try {
 
-      const res = await axios.post( BASE_URL +'/login', 
+      const res = await axios.post(BASE_URL + '/login',
         { emailId, password },
-        {withCredentials:true}
+        { withCredentials: true }
       )
       // console.log(res.data)
       dispatch(addUser(res.data.data)) // add data to store
-      return navigate("/feed")
+      return  navigate("/feed")
 
-    } catch(err){
-        setError(err.response?.data || "Error: Invalid credentials. Please try again.")
-        
-      };
+    } catch (err) {
+      setError(err.response?.data || "Error: Invalid credentials. Please try again.")
+
+    };
 
   }
 
@@ -39,28 +39,35 @@ const Login = () => {
           <h2 className="card-title justify-center">Login</h2>
           <p>Email ID:</p>
           <label className="floating-label">
-            <input 
-            type="text" 
-            value={emailId}
-             className="input input-md" 
-             onChange={(e) => setEmail(e.target.value)}
-             />
-             
+            <input
+              type="text"
+              value={emailId}
+              className="input input-md"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
           </label>
           <p>Password:</p>
           <label className="floating-label">
             <input type="text"
-            value={password} 
-             className="input input-md"
-             onChange={(e) => setPassword(e.target.value)}
-              />
+              value={password}
+              className="input input-md"
+
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleLogin();
+                }
+              }}
+            />
 
           </label>
 
           <p className='text-red-500 text-[16px]'>{error}</p>
 
-          <div className="card-actions justify-end">
+          <div className="card-actions justify-center mt-3 flex gap-15">
             <button className="btn btn-primary text-[18px]" onClick={handleLogin}>Login</button>
+            <button className='btn btn-secondary text-[18px] ' onClick={() => navigate("/signup")}>Signup</button>
           </div>
         </div>
       </div>

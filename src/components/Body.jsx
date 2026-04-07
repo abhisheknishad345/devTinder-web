@@ -23,7 +23,7 @@ const Body = () => {
    
     } catch (err) {
       // console.error(err)
-      if(err.status === 401){
+      if(err.status === 400 || err.status === 401){
       navigate("/login")
       
       }
@@ -40,7 +40,7 @@ const Body = () => {
   }, [])
   
   return (
-    <div className="body"> 
+    <div className="body h-full"> 
 
       <NavBar/>
       <Outlet />
