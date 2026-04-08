@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addFeed } from '../utils/feedSlice'
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
+import ShimmerCard from './ShimmerCard';
 import UserCard from './userCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,20 +37,32 @@ const Feed = () => {
     getFeedData();
   }, []);
 
-  // if (!Array.isArray(feed)) {
-  //   return <h2 className="text-center text-xl">Feed is Loading...</h2>;
-  // }
-
+  if (!Array.isArray(feed)) {
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-xl mt-2">Suggested Feed page for you!!</h2>
-
-      {/* {feed.map((user) => (
-        <UserCard key={user._id} feedUser={user} />
-      ))} */}
-    <UserCard feedUser={feed} />
-      {/* {feed.length === 0 && <p>No new users found!</p>} */}
+    <>
+    <h2 className="text-xl mt-2 text-center">Feed is Loading...</h2>
+    <div className="grid grid-cols-3 items-center mb-10 px-10">
+      {[...Array(6)].map((_, i) => (
+        <ShimmerCard key={i} />
+      ))}
     </div>
+      </>
+  );
+}
+  return (
+    feed && (
+      <> 
+
+        <h2 className="text-xl mt-2 text-center">Suggested Feed page for you!!</h2>
+      <div className="grid grid-cols-3 items-center mb-20 px-10">
+
+      {feed.map((user) => (
+        <UserCard key={user._id} newUser={user} />
+      ))}
+      {feed.length === 0 && <p>No new users found!</p>}
+    </div>
+      </>
+)
   );
 };
 

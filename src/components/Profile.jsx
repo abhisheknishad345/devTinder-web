@@ -107,7 +107,7 @@ const Profile = ({ newUser }) => {
 
       </div>
 
-      <UserCard user={{ Fname, Lname, gender, password, profileurl, age, skills, about }} />
+      <UserCard newUser={{ Fname, Lname, gender,profileurl, age, skills, about }} />
     </div>
 
   )
