@@ -43,6 +43,11 @@ const UserCard = ({ newUser }) => {
                 {/* ✅ About */}
                 <p>{about || "About not available"}</p>
 
+                <div className="card-actions justify-center mt-3 flex gap-15">
+                    <button className="btn btn-primary text-[18px]">Ignore</button>
+                    <button className='btn btn-secondary text-[18px]'>Interested</button>
+                </div>
+
             </div>
         </div>
     );

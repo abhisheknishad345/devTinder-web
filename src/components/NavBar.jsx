@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import {BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
@@ -44,12 +44,14 @@ const NavBar = () => {
                     <Link to="/feed" className="btn btn-ghost text-[18px]">🚀 DevTinder</Link>
                 }
             </div>
-            <div className="flex">
+
+            {/* <div className="flex">
                 <a className="btn btn-ghost text-[18px] ">Home</a>
             </div>
             <div className="flex">
                 <a className="btn btn-ghost text-[18px]">Login</a>
-            </div>
+            </div> */}
+            
             {user && (<div className="flex gap-2">
                 <p className="my-3 text-[20px] text-black font-bold px-3">Welcome {user.Fname}</p>
                 <div className="dropdown dropdown-end mx-5">

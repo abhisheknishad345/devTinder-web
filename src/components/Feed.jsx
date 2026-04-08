@@ -23,7 +23,7 @@ const Feed = () => {
 
       const cleanFeed = res?.data?.data;
 
-      console.log("Feed API", cleanFeed);
+      // console.log("Feed API", cleanFeed);
 
       dispatch(addFeed(cleanFeed)); // ✅ FIXED
 
