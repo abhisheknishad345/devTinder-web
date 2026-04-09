@@ -2,8 +2,8 @@
 import { useState } from "react";
 import UserCard from "./userCard";
 import { useDispatch, useSelector } from "react-redux";
-import{ BASE_URL} from "../utils/constants";
-import {addUser} from "../utils/userSlice"
+import { BASE_URL } from "../utils/constants";
+import { addUser } from "../utils/userSlice"
 import axios from "axios";
 
 const Profile = ({ newUser }) => {
@@ -20,32 +20,39 @@ const Profile = ({ newUser }) => {
   const [skills, setSkills] = useState(newUser.skills);
   const [about, setAbout] = useState(newUser.about);
   const [error, setError] = useState("")
+  const [toast, setToast] = useState(false)
   const user = useSelector((store) => store.user)
   const dispatch = useDispatch()
-  
-  const saveProfile = async() =>{
+
+  const saveProfile = async () => {
     // console.log("Data", user);
     try {
       setError("")
-      const res = await axios.patch( BASE_URL + "/profile/update", 
-        { Fname, Lname, gender,profileurl, age, skills, about }, 
-        {withCredentials: true})
+      const res = await axios.patch(BASE_URL + "/profile/update",
+        { Fname, Lname, gender, profileurl, age, skills, about },
+        { withCredentials: true })
 
       console.log("Response:", res?.data?.message);
       dispatch(addUser(res?.data?.data))
-      alert(res?.data?.message)
-      
+      setToast(true);
+      setTimeout(()=>{
+        setToast(false);
+
+      },3000)
+
     } catch (err) {
       const errorMessage = err.response?.data || "Something went wrong. Please try again.";
       setError(errorMessage);
       alert(errorMessage)
-      
+
     }
   }
 
   if (!newUser) return <h2 className="p-1 m-2 text-2xl font-bold text-center text-red-400">Please login ⚠️</h2>;
 
   return (
+
+    <>
 
     <div className="mb-20 my-3 flex object-cover justify-center items-start gap-10">
 
@@ -74,7 +81,7 @@ const Profile = ({ newUser }) => {
           <label className="flex items-center gap-5">
 
             <input type="text" name="gender" value={gender} placeholder="Gender" className="input"
-            onChange={(e) => setGender(e.target.value)} />
+              onChange={(e) => setGender(e.target.value)} />
 
             {/* <input type="radio" name="gender" value="Male" className="radio" placeholder="Gender"
               onChange={(e) => setGender(e.target.value)}
@@ -130,17 +137,24 @@ const Profile = ({ newUser }) => {
             onChange={(e) => setAbout(e.target.value)}
           >
           </textarea>
-            <p className="text-red-500 text-[16px]">{error}</p>
+          <p className="text-red-500 text-[16px]">{error}</p>
           <button className="btn bg-white  text-[20px] font-semibold text-black w-1/2 mx-auto my-2"
-           onClick={saveProfile}
+            onClick={saveProfile}
           >Save Profile</button>
 
         </fieldset>
 
       </div>
 
-      <UserCard newUser={{ Fname, Lname, gender,profileurl, age, skills, about }} />
+      <UserCard newUser={{ Fname, Lname, gender, profileurl, age, skills, about }} />
+
+      {toast && <div className="toast toast-top toast-center">
+        <div className="alert alert-info">
+          <span className="text-[18px]">Profile updated successfully</span>
+        </div>
+      </div>} 
     </div>
+</>
 
   )
 };
