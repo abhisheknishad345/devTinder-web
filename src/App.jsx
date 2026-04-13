@@ -8,6 +8,7 @@ import EditProfile from "./components/EditProfile"
 import Feed from "./components/Feed"
 import Signup from "./components/Signup"
 import DataComponent from "./components/Error"
+import Connections from "./components/Connections"
 function App() {
 
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/profile/view" element = {<EditProfile/> } /> 
       <Route path="/feed" element = {<Feed/> } /> 
       <Route path="/signup" element = {<Signup/> } />
+      <Route path="/connections" element = {<Connections/> } />
 
       </Route>
     </Routes>

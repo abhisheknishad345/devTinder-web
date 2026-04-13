@@ -15,7 +15,7 @@ const UserCard = ({ newUser }) => {
 
             <figure>
                 <img
-                    className="w-full h-65 object-cover border border-white rounded-2xl"
+                    className="w-50 h-50 object-cover border-2 border-white rounded-full mt-2"
                     src={profileurl}
                     alt="profile"
                 />
