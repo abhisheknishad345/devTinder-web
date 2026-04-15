@@ -12,43 +12,43 @@ const Body = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const userData = useSelector((store)=>store.user)
+  const userData = useSelector((store) => store.user)
 
-  const fetchUser = async() =>{
-    if(userData) return;
+  const fetchUser = async () => {
+    if (userData) return;
     try {
 
-    const res = await axios.get(BASE_URL + "/profile/view", {withCredentials:true})
-   dispatch(addUser(res.data))
-   
+      const res = await axios.get(BASE_URL + "/profile/view", { withCredentials: true })
+      dispatch(addUser(res.data))
+
     } catch (err) {
       // console.error(err)
-      if(err.status === 400 || err.status === 401){
-      navigate("/login")
-      
+      if (err.response?.status === 401) {
+        console.log(err?.response?.data);
+        navigate("/login")
       }
-      
+      // console.error('Error:', err);
+
     }
-    
+
   }
 
+  useEffect(() => {
 
-  useEffect( () =>{
-    
-      fetchUser()
+    fetchUser()
 
   }, [])
-  
+
   return (
-    <div className="body h-full"> 
+    <div className="body h-full">
 
-      <NavBar/>
+      <NavBar />
       <Outlet />
-      <Footer/>
+      <Footer />
 
-  
+
     </div>
   )
-}                      
+}
 
 export default Body;

@@ -1,9 +1,9 @@
 const ShimmerCard = () => {
   return (
-    <div className="card bg-base-200 w-96 shadow-sm my-2 animate-pulse">
+    <div className="card bg-base-300 w-96 shadow-sm my-4 animate-pulse mb-20 px-3">
 
       {/* Image Skeleton */}
-      <div className="w-full h-65 bg-gray-300 rounded-2xl"></div> 
+      <div className="w-50 h-50 object-cover mt-2 bg-gray-300 rounded-full mx-12"></div> 
 
       <div className="card-body space-y-3">
         {/* Name */}

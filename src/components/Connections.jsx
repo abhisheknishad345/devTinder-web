@@ -23,7 +23,7 @@ useEffect( () =>{
 },[])
 
 if (!connection) return;
-if (connection.length == 0) return <h2>No Connection Found</h2>
+if (connection.length == 0) return <h2 className='text-center font-semibold text-xl'>No Connection Found</h2>
     
   return (
       <div className='text-center mx-2 mb-25'>
@@ -33,10 +33,10 @@ if (connection.length == 0) return <h2>No Connection Found</h2>
               return ( 
                 <div className='flex rounded-xl bg-base-300 my-2 p-3 w-1/2 mx-auto'>
                     <div className=''>
-                    <img className='w-30 h-30 rounded-full border-2 border-white' src={profileurl} alt="Profile" />
+                    <img className='w-25 h-25 rounded-full border-2 border-white' src={profileurl} alt="Profile" />
                       
                     </div>
-                  <div className='text-left mx-4'>
+                  <div className='text-left mx-10'>
                   <h2 className='text-xl font-semibold'>{Fname + " " + Lname}</h2>
                 { age && gender && <p>{age + ", "+ gender}</p>}
                 <p>{about}</p>

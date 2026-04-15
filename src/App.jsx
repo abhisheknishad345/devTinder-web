@@ -9,6 +9,8 @@ import Feed from "./components/Feed"
 import Signup from "./components/Signup"
 import DataComponent from "./components/Error"
 import Connections from "./components/Connections"
+import Requestpage from "./components/Requestpage"
+import ShimmerCard from "./components/ShimmerCard"
 function App() {
 
 
@@ -24,6 +26,8 @@ function App() {
       <Route path="/feed" element = {<Feed/> } /> 
       <Route path="/signup" element = {<Signup/> } />
       <Route path="/connections" element = {<Connections/> } />
+      <Route path="/request" element = {<Requestpage/> } />
+      <Route path="/shimmer" element = {<ShimmerCard/> } />
 
       </Route>
     </Routes>

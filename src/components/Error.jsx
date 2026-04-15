@@ -10,14 +10,14 @@ function DataComponent() {
       .then((res) => console.log(res.data))
       .catch((err) => {
         if (err.response?.status === 404) {
-         setError("Page/API not found ⚠️⚠️")
+         setError("Page/API not found!!")
         } else {
           setError("Something went wrong");
         }
       });
   }, []);
 
-  return <h2 className="text-xl font-bold px-5 bg-gray-300 text-black mt-1">{error}</h2>;
+  return <h2 className="text-xl font-bold px-5 bg-gray-200 text-black mt-1 text-center">{error}</h2>;
 }
 
 export default DataComponent
