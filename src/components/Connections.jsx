@@ -1,54 +1,139 @@
-import axios from 'axios'
-import {BASE_URL} from '../utils/constants'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import {addConnection} from "../utils/connectionSlice"
+
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addConnection } from "../utils/connectionSlice";
 
 const Connections = () => {
-    const connection = useSelector((store)=> store.connection)
-    // console.log( "Connection",connection);
-    const dispatch = useDispatch()
-    const fetchConnections = async() =>{
+  const connection = useSelector((store) => store.connection);
 
-     const res =   await axios.get(BASE_URL+"/user/connections", {withCredentials:true})
-        console.log(res?.data?.message);
-        // console.log(res?.data?.data);
-        dispatch(addConnection(res?.data?.data))
-        
+  const dispatch = useDispatch();
 
+  const fetchConnections = async () => {
+    try {
+      const res = await axios.get(
+        BASE_URL + "/user/connections",
+        { withCredentials: true }
+      );
+
+      dispatch(addConnection(res?.data?.data));
+    } catch (err) {
+      console.error(err);
     }
-useEffect( () =>{
-    fetchConnections()
-},[])
+  };
 
-if (!connection) return;
-if (connection.length == 0) return <h2 className='text-center font-semibold text-xl'>No Connection Found</h2>
-    
+  useEffect(() => {
+    fetchConnections();
+  }, []);
+
+  if (!connection) return null;
+
+  if (connection.length === 0) {
+    return (
+      <h2 className="text-center font-semibold text-xl mt-5">
+        No Connection Found
+      </h2>
+    );
+  }
+
   return (
-      <div className='text-center mx-2 mb-25'>
-          <h1 className='mb-3 text-center text-2xl my-5 font-semibold'>Total Connections</h1>
-          {connection.map((connection)=>{
-              const {Fname, Lname, age, gender,about,profileurl} = connection;
-              return ( 
-                <div className='flex rounded-xl bg-base-300 my-2 p-3 w-1/2 mx-auto'>
-                    <div className=''>
-                    <img className='w-25 h-25 rounded-full border-2 border-white' src={profileurl} alt="Profile" />
-                      
-                    </div>
-                  <div className='text-left mx-10'>
-                  <h2 className='text-xl font-semibold'>{Fname + " " + Lname}</h2>
-                { age && gender && <p>{age + ", "+ gender}</p>}
-                <p>{about}</p>
-                  </div>
+    <div className="px-4 py-4 mb-20">
+      
+      <h1 className="
+        text-center
+        text-2xl
+        md:text-3xl
+        font-bold
+        mb-6
+      ">
+        Total Connections
+      </h1>
 
-                </div>
-              )
+      <div className="flex flex-col gap-5 items-center">
+        
+        {connection.map((connection) => {
+          const {
+            Fname,
+            Lname,
+            age,
+            gender,
+            about,
+            profileurl,
+            _id,
+          } = connection;
 
-          })}
+          return (
+            <div
+              key={_id}
+              className="
+                w-full
+                sm:w-[90%]
+                md:w-[80%]
+                lg:w-[65%]
+                xl:w-[55%]
+                bg-base-300
+                rounded-2xl
+                shadow-lg
+                p-4
+                flex
+                flex-col
+                sm:flex-row
+                items-center
+                gap-4
+              "
+            >
+              
+              {/* Profile Image */}
+              <div className="shrink-0">
+                <img
+                  className="
+                    w-24
+                    h-24
+                    sm:w-28
+                    sm:h-28
+                    rounded-full
+                    border-2
+                    border-white
+                    object-cover
+                  "
+                  src={profileurl}
+                  alt="Profile"
+                />
+              </div>
 
+              {/* User Details */}
+              <div className="
+                flex-1
+                text-center
+                sm:text-left
+              ">
+                
+                <h2 className="text-xl font-bold">
+                  {Fname + " " + Lname}
+                </h2>
+
+                {age && gender && (
+                  <p className="text-gray-400 mt-1">
+                    {age + ", " + gender}
+                  </p>
+                )}
+
+                <p className="
+                  mt-2
+                  text-sm
+                  sm:text-base
+                  wrap-break-words
+                ">
+                  {about}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Connections
+export default Connections;

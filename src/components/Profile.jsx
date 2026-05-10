@@ -3,177 +3,235 @@ import { useState } from "react";
 import UserCard from "./userCard";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
-import { addUser } from "../utils/userSlice"
+import { addUser } from "../utils/userSlice";
 import axios from "axios";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
-import { Bounce, Flip, Zoom, Slide } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const Profile = ({ newUser }) => {
-  // console.log("Current user", newUser);
-
-  const [Fname, setFname] = useState(newUser.Fname || "");
-  // console.log(newUser?.Fname || "No Fname");
+  const [Fname, setFname] = useState(newUser.Fname);
   const [Lname, setLname] = useState(newUser.Lname);
-  // const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState(newUser.password);
   const [gender, setGender] = useState(newUser.gender);
   const [profileurl, setProfileurl] = useState(newUser.profileurl);
   const [age, setAge] = useState(newUser.age);
   const [skills, setSkills] = useState(newUser.skills);
   const [about, setAbout] = useState(newUser.about);
-  const [error, setError] = useState("")
-  const [settoast, setShowToast] = useState(false)
-  const user = useSelector((store) => store.user)
-  const dispatch = useDispatch()
+
+  const [error, setError] = useState("");
+  const [settoast, setShowToast] = useState(false);
+
+  const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   const saveProfile = async () => {
-    /* toast("Custom Toast 🚀", {
-      position: "top-center",
-      autoClose: 3000,
-      theme: "dark",
-      style: {
-        background: "white",
-        color: "black",
-        borderRadius: "10px",
-        padding: "12px",
-        },
-        }); */
-
     try {
-      setError("")
-      const res = await axios.patch(BASE_URL + "/profile/update",
-        { Fname, Lname, gender, profileurl, age, skills, about },
-        { withCredentials: true })
+      setError("");
 
-      console.log("Response:", res?.data?.message);
-      dispatch(addUser(res?.data?.data))
-      toast.success(res?.data?.message);
+      const res = await axios.patch(
+        BASE_URL + "/profile/update",
+        { Fname, Lname, gender, profileurl, age, skills, about },
+        { withCredentials: true }
+      );
+
+      dispatch(addUser(res?.data?.data));
+
+      toast.success(
+        <p className="text-black">{res?.data?.message}</p>
+      );
+
       setShowToast(true);
+
       setTimeout(() => {
         setShowToast(false);
-
-      }, 3000)
-
+      }, 3000);
 
     } catch (err) {
-      const errorMessage = err.response?.data || "Something went wrong. Please try again.";
+      const errorMessage =
+        err.response?.data ||
+        "Something went wrong. Please try again.";
+
       setError(errorMessage);
-      toast.warning(errorMessage)
-
+      toast.warning(errorMessage);
     }
-  }
+  };
 
-  if (!newUser) return <h2 className="p-1 m-2 text-2xl font-bold text-center text-red-400">Please login ⚠️</h2>;
+  if (!newUser)
+    return (
+      <h2 className="p-2 m-2 text-2xl font-bold text-center text-red-400">
+        Please login ⚠️
+      </h2>
+    );
 
   return (
-
     <>
+      <div
+        className="
+          w-full
+          min-h-screen
+          flex
+          flex-col
+          xl:flex-row
+          justify-center
+          items-center
+          xl:items-start
+          gap-8
+          px-4
+          py-6
+          mb-20
+        "
+      >
+        <div
+          className="
+            w-full
+            max-w-md
+          "
+        >
+          <fieldset
+            className="
+              fieldset
+              bg-base-300
+              border-base-300
+              rounded-2xl
+              border
+              p-5
+              shadow-lg
+              w-full
+            "
+          >
+            <h2 className="text-2xl font-bold text-center mb-4">
+              Edit Profile
+            </h2>
 
-      <div className="mb-20 my-3 flex object-cover justify-center items-start gap-10">
+            <label className="label">First Name:</label>
 
-        <div className='flex flex-col justify-center items-center my-2 gap-5 min-h-screen'>
-
-          <fieldset className="fieldset  bg-base-300 border-base-300 rounded-box min-h-screen w-[350px] border p-4 pb-10">
-            <h2 className='flex justify-center text-2xl'>Edit Profile</h2>
-
-            <label className="label ">First Name:</label>
-            <input type="text"
-              className="input input-md"
+            <input
+              type="text"
+              className="input input-bordered w-full"
               name="Fname"
               placeholder="First Name"
               value={Fname}
               onChange={(e) => setFname(e.target.value)}
-              required />
+              required
+            />
 
-            <label className="label">Last Name:</label>
-            <input type="text" className="input" placeholder="Last Name"
+            <label className="label mt-2">Last Name:</label>
+
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              placeholder="Last Name"
               name="Lname"
               value={Lname}
               onChange={(e) => setLname(e.target.value)}
-              required />
+              required
+            />
 
-            <label className="label">Gender:</label>
-            <label className="flex items-center gap-5">
+            <label className="label mt-2">Gender:</label>
 
-              <input type="text" name="gender" value={gender} placeholder="Gender" className="input"
-                onChange={(e) => setGender(e.target.value)} />
-
-              {/* <input type="radio" name="gender" value="Male" className="radio" placeholder="Gender"
+            <input
+              type="text"
+              name="gender"
+              value={gender}
+              placeholder="Gender"
+              className="input input-bordered w-full"
               onChange={(e) => setGender(e.target.value)}
-              required />
-            Male
+            />
 
-            <input type="radio" name="gender" value="Female" className="radio" placeholder="Gender"
-              onChange={(e) => setGender(e.target.value)}
-              required />
-            Female */}
+            <label className="label mt-2">Age:</label>
 
-            </label>
-
-
-            <label className="label">Age:</label>
-            <input type="number" className="input" placeholder="Age"
+            <input
+              type="number"
+              className="input input-bordered w-full"
+              placeholder="Age"
               name="age"
               value={age}
               onChange={(e) => setAge(e.target.value)}
-              required />
+              required
+            />
 
+            <label className="label mt-2">Profile URL:</label>
 
-            <label className="label">Password:</label>
-            <input type="text" className="input" placeholder="Password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required />
-
-
-
-            <label className="label">ProfileURL:</label>
-            <input type="text" className="input" placeholder="Profile URL"
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              placeholder="Profile URL"
               name="profileurl"
               value={profileurl}
               onChange={(e) => setProfileurl(e.target.value)}
-              required />
+              required
+            />
 
+            <label className="label mt-2">Skills:</label>
 
-            <label className="label">Skills:</label>
-            <textarea name="skills" id="" className="textarea" placeholder="Skills"
+            <textarea
+              name="skills"
+              className="textarea textarea-bordered w-full"
+              placeholder="Skills"
               value={skills}
               onChange={(e) =>
-                // setSkills(e.target.value)
                 setSkills(e.target.value.split(","))
               }
-
             ></textarea>
 
-            <label className="label">About:</label>
-            <textarea name="about" id="" className="textarea" placeholder="About you"
+            <label className="label mt-2">About:</label>
+
+            <textarea
+              name="about"
+              className="textarea textarea-bordered w-full"
+              placeholder="About you"
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-            >
-            </textarea>
-            <p className="text-red-500 text-[16px]">{error}</p>
-            <button className="btn bg-white  text-[20px] font-semibold text-black w-1/2 mx-auto my-2"
+            ></textarea>
+
+            <p className="text-red-500 text-sm mt-2">
+              {error}
+            </p>
+
+            <button
+              className="
+                btn
+                bg-white
+                text-black
+                text-lg
+                font-semibold
+                w-full
+                sm:w-1/2
+                mx-auto
+                mt-5
+              "
               onClick={saveProfile}
-            >Save Profile</button>
-
+            >
+              Save Profile
+            </button>
           </fieldset>
-
         </div>
 
-        <UserCard newUser={{ Fname, Lname, gender, profileurl, age, skills, about }} />
-
-        {/* {settoast && <div className="toast toast-top toast-center">
-        <div className="alert alert-info">
-          <span className="text-[18px]">Profile updated successfully</span>
+        <div
+          className="
+            w-full
+            flex
+            justify-center
+            xl:w-auto
+          "
+        >
+          <UserCard
+            newUser={{
+              Fname,
+              Lname,
+              gender,
+              profileurl,
+              age,
+              skills,
+              about,
+            }}
+          />
         </div>
-      </div>}  */}
       </div>
+
       <ToastContainer />
     </>
-
-  )
+  );
 };
 
 export default Profile;
+

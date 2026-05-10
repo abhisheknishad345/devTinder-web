@@ -1,0 +1,165 @@
+/*
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+  const navigate = useNavigate(); //
+
+  return (
+    <div className="min-h-screen flex flex-col bg-base-100">
+     
+      <div className="navbar bg-base-300 px-4 md:px-8 shadow-md sticky top-0 z-50">
+        <div className="flex-1">
+          <button 
+            className="btn btn-ghost text-xl md:text-2xl font-bold italic text-primary"
+            onClick={() => navigate("/")}
+          >
+            devTinder
+          </button>
+        </div>
+        <div className="flex-none gap-2">
+          <button 
+            className="btn btn-ghost btn-sm md:btn-md" 
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
+          <button 
+            className="btn btn-primary btn-sm md:btn-md" 
+            onClick={() => navigate("/signup")}
+          >
+            Signup
+          </button>
+        </div>
+      </div>
+
+      
+      <div className="hero grow bg-linear-to-b from-base-300 to-base-100 px-4">
+        <div className="hero-content text-center">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+              Where <span className="text-primary">Code</span> Meets its 
+              <span className="text-secondary"> Match.</span>
+            </h1>
+            <p className="py-6 text-base md:text-xl opacity-80 leading-relaxed">
+              Stop scrolling alone. Connect with developers who share your stack, 
+              your passion, and your debugging nightmares. Swipe right on your next 
+              coding partner or co-founder.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+              <button 
+                className="btn btn-primary btn-lg px-10 text-lg shadow-lg hover:scale-105 transition-transform"
+                onClick={() => navigate("/signup")}
+              >
+                Get Started
+              </button>
+              <button 
+                className="btn btn-outline btn-lg px-10 text-lg hover:scale-105 transition-transform"
+                onClick={() => navigate("/login")}
+              >
+                Explore Feed
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div className="py-12 md:py-20 bg-base-100 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="card bg-base-200 shadow-sm p-6 text-center border border-white/5">
+            <h3 className="text-xl font-bold mb-2 text-secondary">Discover</h3>
+            <p className="text-sm opacity-70">Find developers based on skills, interests, and location.</p>
+          </div>
+          <div className="card bg-base-200 shadow-sm p-6 text-center border border-white/5">
+            <h3 className="text-xl font-bold mb-2 text-secondary">Connect</h3>
+            <p className="text-sm opacity-70">Match with peers for pair programming or networking.</p>
+          </div>
+          <div className="card bg-base-200 shadow-sm p-6 text-center border border-white/5">
+            <h3 className="text-xl font-bold mb-2 text-secondary">Build</h3>
+            <p className="text-sm opacity-70">Turn connections into projects and career opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+*/
+
+
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux"; // Import useSelector
+
+const Home = () => {
+  const navigate = useNavigate();
+  
+  // Grab the user from your Redux store (adjust 'state.user' based on your store config)
+  const user = useSelector((store) => store.user);
+
+
+
+  return (
+    <div className="min-h-screen flex flex-col bg-base-100">
+   
+     { /* --- Navbar --- */}
+
+      <div className="navbar bg-base-300 px-4 md:px-8 shadow-md sticky top-0 z-50">
+        <div className="flex-1">
+          <button className="btn btn-ghost text-xl md:text-2xl font-bold italic text-primary" onClick={() => navigate("/")}>
+            devTinder
+          </button>
+        </div>
+        <div className="flex-none gap-2">
+        { /* Only show Login/Signup if NO user is logged in */}
+          {!user ? (
+            <>
+              <button className="btn btn-outline btn-sm md:btn-md mr-2" onClick={() => navigate("/login")}>
+                Login
+              </button>
+              <button className="btn btn-primary btn-sm md:btn-md" onClick={() => navigate("/signup")}>
+                Signup
+              </button>
+            </>
+          ) : (
+            /* Show this if user IS logged in */
+            <button className="btn btn-outline btn-sm md:btn-md" onClick={() => navigate("/feed")}>
+              Go to Feed
+            </button>
+          )}
+        </div>
+      </div>
+
+       {/* --- Hero Section --- */}
+      <div className="hero grow bg-linear-to-b from-base-300 to-base-100 px-4">
+        <div className="hero-content text-center">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+              Where <span className="text-primary">Code</span> Meets its 
+              <span className="text-secondary"> Match.</span>
+            </h1>
+            
+            <p className="py-6 text-base md:text-xl opacity-80">
+              {user ? `Welcome back, ${user.Fname}! Ready to find your next collaborator?` : "Stop scrolling alone. Connect with developers who share your stack."}
+            </p>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+              {!user ? (
+                <>
+                  <button className="btn btn-primary btn-lg px-10" onClick={() => navigate("/signup")}>Get Started</button>
+                  <button className="btn btn-outline btn-lg px-10" onClick={() => navigate("/login")}>Login</button>
+                </>
+              ) : (
+                <button className="btn btn-primary btn-lg px-10" onClick={() => navigate("/feed")}>Explore Feed</button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home; 

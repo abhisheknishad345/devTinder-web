@@ -11,6 +11,7 @@ import DataComponent from "./components/Error"
 import Connections from "./components/Connections"
 import Requestpage from "./components/Requestpage"
 import ShimmerCard from "./components/ShimmerCard"
+import Card from "./components/Card"
 function App() {
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/connections" element = {<Connections/> } />
       <Route path="/request" element = {<Requestpage/> } />
       <Route path="/shimmer" element = {<ShimmerCard/> } />
+      <Route path="/card" element = {<Card/> } />
 
       </Route>
     </Routes>

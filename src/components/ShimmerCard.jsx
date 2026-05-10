@@ -1,31 +1,99 @@
 const ShimmerCard = () => {
   return (
-    <div className="card bg-base-300 w-96 shadow-sm my-4 animate-pulse mb-20 px-3">
-
-      {/* Image Skeleton */}
-      <div className="w-50 h-50 object-cover mt-2 bg-gray-300 rounded-full mx-12"></div> 
-
-      <div className="card-body space-y-3">
-        {/* Name */}
-        <div className="h-5 bg-gray-300 rounded w-3/4"></div>
-
-        {/* Age/Gender */}
-        <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-
-        {/* Skills */}
-        <div className="h-4 bg-gray-300 rounded w-full"></div>
-
-        {/* About */}
-        <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-
-        {/* Buttons */}
-        <div className="flex gap-4 mt-3">
-          <div className="h-10 bg-gray-300 rounded w-1/2"></div>
-          <div className="h-10 bg-gray-300 rounded w-1/2"></div>
-        </div>
-
+    <div
+      className="
+        w-full
+        max-w-sm
+        sm:max-w-md
+        bg-base-300
+        rounded-2xl
+        shadow-lg
+        animate-pulse
+        p-4
+        mx-auto
+      "
+    >
+      <div className="flex justify-center">
+        <div
+          className="
+            w-28
+            h-28
+            sm:w-36
+            sm:h-36
+            bg-gray-300
+            rounded-full
+          "
+        ></div>
       </div>
 
+      <div className="mt-6 space-y-4">
+        
+        <div
+          className="
+            h-6
+            bg-gray-300
+            rounded-lg
+            w-3/4
+            mx-auto
+          "
+        ></div>
+
+        <div
+          className="
+            h-4
+            bg-gray-300
+            rounded-lg
+            w-1/2
+            mx-auto
+          "
+        ></div>
+
+        <div
+          className="
+            h-4
+            bg-gray-300
+            rounded-lg
+            w-full
+          "
+        ></div>
+
+        <div
+          className="
+            h-4
+            bg-gray-300
+            rounded-lg
+            w-5/6
+          "
+        ></div>
+
+        <div
+          className="
+            flex
+            flex-col
+            sm:flex-row
+            gap-3
+            pt-3
+          "
+        >
+          <div
+            className="
+              h-10
+              bg-gray-300
+              rounded-xl
+              w-full
+            "
+          ></div>
+
+          <div
+            className="
+              h-10
+              bg-gray-300
+              rounded-xl
+              w-full
+            "
+          ></div>
+        </div>
+      </div>
     </div>
   );
 };

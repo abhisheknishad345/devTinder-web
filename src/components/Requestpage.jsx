@@ -1,86 +1,173 @@
-import axios from "axios"
-import {BASE_URL} from "../utils/constants"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import {addRequest, removeRequest} from "../utils/requestSlice"
 
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addRequest, removeRequest } from "../utils/requestSlice";
 
 const Requestpage = () => {
-    const dispatch = useDispatch()
-    const request = useSelector((store)=> store.request)
+    const dispatch = useDispatch();
+    const request = useSelector((store) => store.request);
 
-    const reviewRequest = async(status, _id)=>{
+    const reviewRequest = async (status, _id) => {
         try {
-        await axios.post(BASE_URL + "/request/review/" + status + "/" + _id, {}, {withCredentials:true} )
-        dispatch(removeRequest(_id))
-            
+            await axios.post(
+                BASE_URL + "/request/review/" + status + "/" + _id,
+                {},
+                { withCredentials: true }
+            );
+
+            dispatch(removeRequest(_id));
         } catch (err) {
             console.error(err);
-            
         }
+    };
+
+    const fetchRequest = async () => {
+        try {
+            const res = await axios.get(
+                BASE_URL + "/user/requests/received",
+                { withCredentials: true }
+            );
+
+            dispatch(addRequest(res?.data?.data));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchRequest();
+    }, []);
+
+    if (!request) return null;
+
+    if (request.length === 0) {
+        return (
+            <h1 className="text-center text-xl font-semibold mt-5 mb-5">
+                No Request Found
+            </h1>
+        );
     }
 
-    const fetchRequest = async() =>{
-    try {
-        const res  = await axios.get(BASE_URL + "/user/requests/received", 
-        {withCredentials:true})
-        console.log(res?.data?.data);
-        dispatch(addRequest(res?.data?.data))
-    
-        
-    } catch (err) {
-        console.error(err);
-        
-    }
-}
-    
-    useEffect(() =>{
-        fetchRequest()
-    },[])
+    return (
+        <div className="px-4 py-4">
+            <h2 className="text-center font-bold text-2xl mb-6">
+                Total Requests
+            </h2>
 
-    if(!request) return;
+            <div className="flex flex-col gap-5 items-center">
+                {request.map((requests) => {
+                    const {
+                        _id,
+                        Fname,
+                        Lname,
+                        age,
+                        gender,
+                        profileurl,
+                        about,
+                    } = requests.fromUserId;
 
-    if(request.length == 0){
-        return <h1 className="text-center text-xl font-semibold">No Request Found</h1>
-    }
+                    return (
+                        <div
+                            key={_id}
+                            className="
+                w-full
+                sm:w-[90%]
+                md:w-[80%]
+                lg:w-[65%]
+                xl:w-[55%]
+                bg-base-300
+                rounded-2xl
+                shadow-lg
+                p-4
+                flex
+                flex-col
+                sm:flex-row
+                items-center
+                gap-4
+              "
+                        >
 
+                            {/* Profile Image */}
+                            <div className="shrink-0">
+                                <img
+                                    className="
+                    w-24
+                    h-24
+                    sm:w-28
+                    sm:h-28
+                    rounded-full
+                    border-2
+                    border-white
+                    object-cover
+                  "
+                                    src={profileurl}
+                                    alt="Profile"
+                                />
+                            </div>
 
-  return (
-    <div className="px-2">
+                            {/* User Info */}
+                            <div className="flex-1 text-center sm:text-left">
+                                <h2 className="text-xl font-bold">
+                                    {Fname + " " + Lname}
+                                </h2>
 
-        <h2 className='text-center font-semibold text-xl'>Total Requests</h2>
-        
-           { request.map((requests) =>{
-            const {_id,Fname, Lname,age,gender,profileurl,about} = requests.fromUserId;
-            return (
-                <div className='flex justify-around items-center rounded-xl bg-base-300 my-2 p-3 w-1/2 mx-auto'>
+                                {age && gender && (
+                                    <p className="text-gray-400 mt-1">
+                                        {age + ", " + gender}
+                                    </p>
+                                )}
 
-                    <div className=''>
-                    <img className='w-30 h-30 rounded-full border-2 border-white' src={profileurl} alt="Profile" />
-                    </div>
+                                <p className="mt-2 text-sm sm:text-base wrap-break-words">
+                                    {about}
+                                </p>
+                            </div>
 
-                  <div className='text-left mx-4'>
-                  <h2 className='text-xl font-semibold'>{Fname + " " + Lname}</h2>
-                { age && gender && <p>{age + ", "+ gender}</p>}
-                <p>{about}</p>
-                  </div>
-                   
-                <div>
-                </div>
-            <button className="btn btn-primary text-[15px] mx-2"
-           onClick={()=> reviewRequest("rejected", requests._id)} >Reject</button>
-              <button className='btn btn-secondary text-[15px]'
-              onClick={()=> reviewRequest("accepted", requests._id)}>Accept</button>
-                    
-                   
+                            {/* Buttons */}
+                            <div
+                                className="
+                  flex
+                  sm:flex-col
+                  gap-3
+                  w-full
+                  sm:w-auto
+                "
+                            >
+                                <button
+                                    className="
+                    btn
+                    btn-primary
+                    flex-1
+                    sm:w-28
+                  "
+                                    onClick={() =>
+                                        reviewRequest("rejected", requests._id)
+                                    }
+                                >
+                                    Reject
+                                </button>
 
-                </div>
-            )
-            })}
+                                <button
+                                    className="
+                    btn
+                    btn-secondary
+                    flex-1
+                    sm:w-28
+                  "
+                                    onClick={() =>
+                                        reviewRequest("accepted", requests._id)
+                                    }
+                                >
+                                    Accept
+                                </button>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
 
-    </div>
-  )
-}
-
-export default Requestpage
+export default Requestpage;

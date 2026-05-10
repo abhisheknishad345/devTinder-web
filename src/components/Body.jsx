@@ -2,6 +2,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import Home from "./Home";
+import DevFooter from "./DevFooter";
+import DevTinderHomePage from "./DevTinderHomePage";
 import axios from 'axios';
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
@@ -18,7 +21,7 @@ const Body = () => {
     if (userData) return;
     try {
 
-      const res = await axios.get(BASE_URL + "/profile/view", { withCredentials: true })
+      const res = await axios.get(BASE_URL + "/profile/view" , { withCredentials: true })
       dispatch(addUser(res.data))
 
     } catch (err) {
@@ -40,11 +43,14 @@ const Body = () => {
   }, [])
 
   return (
-    <div className="body h-full">
+    <div className="body max-h-full max-w-full min-w-full">
 
       <NavBar />
       <Outlet />
-      <Footer />
+      {/* <DevFooter /> */}
+      {/* <Footer /> */}
+      <Home/>
+      {/* <DevTinderHomePage/> */}
 
 
     </div>
