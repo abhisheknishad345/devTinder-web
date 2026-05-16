@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 
-function DataComponent() {
+function HandleError() {
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -11,7 +11,7 @@ function DataComponent() {
       .then((res) => console.log(res.data))
       .catch((err) => {
         if (err.response?.status === 404) {
-          setError("Requested resource was not found.");
+          setError("Requested page not found !!");
         } else {
           setError("Unable to fetch data. Please try again later.");
         }
@@ -52,4 +52,4 @@ function DataComponent() {
   );
 }
 
-export default DataComponent;
+export default HandleError;

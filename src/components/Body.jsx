@@ -1,10 +1,8 @@
 
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate,useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
-import Footer from "./Footer";
 import Home from "./Home";
 import DevFooter from "./DevFooter";
-import DevTinderHomePage from "./DevTinderHomePage";
 import axios from 'axios';
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
@@ -14,9 +12,12 @@ import { addUser } from "../utils/userSlice";
 const Body = () => {
 
   const navigate = useNavigate()
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
   const dispatch = useDispatch()
   const userData = useSelector((store) => store.user)
 
+  /*
   const fetchUser = async () => {
     if (userData) return;
     try {
@@ -25,12 +26,12 @@ const Body = () => {
       dispatch(addUser(res.data))
 
     } catch (err) {
-      // console.error(err)
+     
       if (err.response?.status === 401) {
         console.log(err?.response?.data);
-        navigate("/login")
+        navigate("/")
       }
-      // console.error('Error:', err);
+      
 
     }
 
@@ -41,20 +42,24 @@ const Body = () => {
     fetchUser()
 
   }, [])
+  */
 
   return (
-    <div className="body max-h-full max-w-full min-w-full">
+    <div className="body min-h-screen flex flex-col">
 
-      <NavBar />
+      <NavBar/>
+
+      {/* Homepage only */}
+      {isHomePage && <Home />}
+
+      {/* Other pages */}
       <Outlet />
-      {/* <DevFooter /> */}
-      {/* <Footer /> */}
-      <Home/>
-      {/* <DevTinderHomePage/> */}
 
+      {/* Footer only on homepage */}
+      {isHomePage && <DevFooter />}
 
     </div>
-  )
-}
+  );
+};
 
 export default Body;

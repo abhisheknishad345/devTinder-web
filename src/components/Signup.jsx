@@ -124,13 +124,13 @@ const Signup = () => {
       return;
     }
 
-   if (!/^\S+@\S+\.\S+$/.test(emailId)) {
-  setEmail({
-    emailId: "Invalid email format",
-  });
+    if (!/^\S+@\S+\.\S+$/.test(emailId)) {
+      setEmail({
+        emailId: "Invalid email format",
+      });
 
-  return;
-}
+      return;
+    }
 
     try {
       const res = await axios.post(
@@ -206,7 +206,7 @@ const Signup = () => {
           </h2>
 
           <div className="space-y-4">
-            
+
             <div>
               <label className="label">First Name:</label>
 
