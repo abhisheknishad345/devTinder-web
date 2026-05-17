@@ -6,11 +6,13 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { ToastContainer, toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [emailId, setEmail] = useState("@gmail.com");
   const [password, setPassword] = useState("@123");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Login = () => {
       );
 
       dispatch(addUser(res.data.data));
-      toast.success("Login Successful!");
+      // toast.success("Login Successful!");
       return navigate("/feed");
 
     } catch (err) {
@@ -42,20 +44,20 @@ const Login = () => {
           - px-4 for mobile breathing room
       */}
       <div className="min-h-[90vh] flex justify-center items-center px-4 py-10 lg:py-20">
-        
+
         {/* Card: 
             - w-full for mobile
             - max-w-sm for small devices, md:max-w-md for larger screens
             - Shadow and border for depth
         */}
         <div className="w-full max-w-sm md:max-w-md bg-base-300 rounded-2xl shadow-xl border border-white/5 p-6 md:p-10">
-          
+
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 tracking-tight">
             Welcome Back
           </h2>
 
           <div className="space-y-6">
-            
+
             {/* Email Field */}
             <div className="form-control w-full">
               <label className="label">
@@ -71,17 +73,32 @@ const Login = () => {
             </div>
 
             {/* Password Field */}
+            {/* Password Field */}
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
               </label>
-              <input
-                type="text"
-                value={password}
-                className="input input-bordered w-full focus:input-primary transition-all"
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-              />
+
+              <div className="relative">
+
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  className="input input-bordered w-full focus:input-primary transition-all pr-12"
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+                />
+
+                <button
+                  type="button"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
+                   {showPassword ? "🙈" : "👁️"}
+                </button>
+
+              </div>
             </div>
 
             {/* Error Message */}
@@ -112,7 +129,7 @@ const Login = () => {
         </div>
       </div>
 
-      <ToastContainer position="bottom-right" />
+      {/* <ToastContainer position="bottom-right" /> */}
     </>
   );
 };

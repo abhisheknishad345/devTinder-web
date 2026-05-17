@@ -21,7 +21,7 @@ const NavBar = () => {
 
       dispatch(removeUser());
 
-      return navigate("/login");
+      return navigate("/");
 
     } catch (err) {
       console.error("Logout error:", err);

@@ -17,7 +17,7 @@ const Body = () => {
   const dispatch = useDispatch()
   const userData = useSelector((store) => store.user)
 
-  /*
+  
   const fetchUser = async () => {
     if (userData) return;
     try {
@@ -42,14 +42,14 @@ const Body = () => {
     fetchUser()
 
   }, [])
-  */
+
 
   return (
     <div className="body min-h-screen flex flex-col">
 
       <NavBar/>
 
-      {/* Homepage only */}
+      {/* render only Homepage */}
       {isHomePage && <Home />}
 
       {/* Other pages */}

@@ -9,7 +9,7 @@ const Home = () => {
   const isLoggedIn = localStorage.getItem("token");
 
   return (
-    <div className="min-h-screen flex flex-col bg-base-100">
+    <div className="min-h-screen flex flex-col bg-base-100 ">
 
       {/* Navbar */}
       <div className="navbar bg-base-300 px-4 md:px-8 shadow-md sticky top-0 z-5">
@@ -25,10 +25,10 @@ const Home = () => {
 
         {/* Hide Login & Signup after login */}
         {!isLoggedIn && (
-          <div className="flex-none gap-2">
+          <div className="flex-none gap-2 ">
             
             <button
-              className="btn btn-ghost btn-sm md:btn-md"
+              className="btn btn-ghost border-white btn-sm md:btn-md mx-2"
               onClick={() => navigate("/login")}
             >
               Login
