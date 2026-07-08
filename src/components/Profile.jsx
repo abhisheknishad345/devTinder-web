@@ -28,7 +28,7 @@ const Profile = ({ newUser }) => {
       setError("");
 
       const res = await axios.patch(
-        BASE_URL + "/profile/update",
+        BASE_URL + "/profile/update"+
         { Fname, Lname, gender, profileurl, age, skills, about },
         { withCredentials: true }
       );
