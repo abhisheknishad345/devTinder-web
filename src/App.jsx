@@ -12,6 +12,7 @@ import Connections from "./components/Connections"
 import Requestpage from "./components/Requestpage"
 import ShimmerCard from "./components/ShimmerCard"
 import Chat from "./components/Chat"
+import Message from "./components/Message"
 function App() {
 
 
@@ -29,7 +30,9 @@ function App() {
       <Route path="/connections" element = {<Connections/> } />
       <Route path="/request" element = {<Requestpage/> } />
       <Route path="/shimmer" element = {<ShimmerCard/> } />
-      <Route path="/chat" element = {<Chat/> } />
+      <Route path="/chat/:targetUserId" element = {<Chat/> } />
+      <Route path="/message" element = {<Message/> } />
+
 
       </Route>
     </Routes>

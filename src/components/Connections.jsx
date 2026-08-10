@@ -4,6 +4,8 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
+import Chat from "./Chat"
+import { Link } from "react-router-dom";
 
 const Connections = () => {
   const connection = useSelector((store) => store.connection);
@@ -39,7 +41,7 @@ const Connections = () => {
 
   return (
     <div className="px-4 py-4 mb-20">
-      
+
       <h1 className="
         text-center
         text-2xl
@@ -51,7 +53,7 @@ const Connections = () => {
       </h1>
 
       <div className="flex flex-col gap-5 items-center">
-        
+
         {connection.map((connection) => {
           const {
             Fname,
@@ -83,7 +85,7 @@ const Connections = () => {
                 gap-4
               "
             >
-              
+
               {/* Profile Image */}
               <div className="shrink-0">
                 <img
@@ -96,6 +98,7 @@ const Connections = () => {
                     border-2
                     border-white
                     object-cover
+                    flex
                   "
                   src={profileurl}
                   alt="Profile"
@@ -108,7 +111,7 @@ const Connections = () => {
                 text-center
                 sm:text-left
               ">
-                
+
                 <h2 className="text-xl font-bold">
                   {Fname + " " + Lname}
                 </h2>
@@ -127,7 +130,11 @@ const Connections = () => {
                 ">
                   {about}
                 </p>
+                
               </div>
+              <Link to={"/chat/" + _id}>
+               <button className="cursor-pointer p-3 rounded-xl bg-yellow-500 text-black mt-2 text-[18px] font-bold m-5"> Chat </button>
+                </Link>
             </div>
           );
         })}

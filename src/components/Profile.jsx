@@ -27,8 +27,8 @@ const Profile = ({ newUser }) => {
     try {
       setError("");
 
-      const res = await axios.patch(
-        BASE_URL + "/profile/update"+
+      const res = await axios.put(
+        BASE_URL + "/profile/update",
         { Fname, Lname, gender, profileurl, age, skills, about },
         { withCredentials: true }
       );
@@ -51,7 +51,7 @@ const Profile = ({ newUser }) => {
         "Something went wrong. Please try again.";
 
       setError(errorMessage);
-      toast.warning(errorMessage);
+      toast.warning(<p className="text-black"> {errorMessage} </p> );
     }
   };
 

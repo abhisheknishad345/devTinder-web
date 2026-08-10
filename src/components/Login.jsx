@@ -6,7 +6,8 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { ToastContainer, toast } from "react-toastify";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash,FaUser,FaLock } from "react-icons/fa";
+import { FiEyeOff, FiEye } from "react-icons/fi";
 
 const Login = () => {
   const [emailId, setEmail] = useState("@gmail.com");
@@ -62,6 +63,7 @@ const Login = () => {
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Email ID</span>
+                <FaUser/>
               </label>
               <input
                 type="email"
@@ -69,7 +71,7 @@ const Login = () => {
                 value={emailId}
                 className="input input-bordered w-full focus:input-primary transition-all"
                 onChange={(e) => setEmail(e.target.value)}
-              />
+                />
             </div>
 
             {/* Password Field */}
@@ -77,6 +79,7 @@ const Login = () => {
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
+                <FaLock/>
               </label>
 
               <div className="relative">
@@ -94,8 +97,8 @@ const Login = () => {
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
-                   {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                   {/* {showPassword ? "🙈" : "👁️"} */}
                 </button>
 
               </div>

@@ -139,22 +139,23 @@ const Signup = () => {
         { withCredentials: true }
       );
 
-      alert("Signup Successful! 🚀🚀");
+      alert("Signup Successful !!");
+      toast.success( <p className="text-black">
+            {res.data.message || 'Signup successful!'}
+          </p>);
 
       dispatch(addUser(res?.data?.data));
 
       navigate("/profile/view");
 
     } catch (err) {
-      setError(err.response?.data || "Something went wrong");
-
-      if (err?.response?.data?.error) {
-        toast.warning(
-          <p className="text-red-500">
-            {err?.response?.data?.error}
-          </p>
-        );
-      }
+     
+      const errorMessage = err.response?.data?.message || 'Something went wrong!';
+      
+      // Display Error Toast
+      toast.error(<p className="text-black">
+            {errorMessage}
+          </p>);
     }
   };
 
