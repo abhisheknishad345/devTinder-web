@@ -5,12 +5,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { FiEyeOff, FiEye } from "react-icons/fi";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [error, setError] = useState("");
+   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     Fname: "",
@@ -103,7 +105,7 @@ const Signup = () => {
     if (!passwordRegex.test(password)) {
       setPassErrors({
         password:
-          "Password must be 6+ characters, include 1 uppercase, 1 number, 1 special character",
+          "Password must be 8+ characters, include 1 uppercase, 1 number, 1 special character",
       });
 
       return;
@@ -139,23 +141,24 @@ const Signup = () => {
         { withCredentials: true }
       );
 
-      alert("Signup Successful !!");
-      toast.success( <p className="text-black">
-            {res.data.message || 'Signup successful!'}
-          </p>);
+      toast.success(<p className="text-black">
+        {res.message || 'Signup successful '}
+      </p>);
+      alert("Signup Successful 🚀!!");
+
 
       dispatch(addUser(res?.data?.data));
 
-      navigate("/profile/view");
+      navigate("/feed");
 
     } catch (err) {
-     
-      const errorMessage = err.response?.data?.message || 'Something went wrong!';
-      
+
+      const errorMessage = err.response?.data?.message || 'Password is weak enter strong';
+
       // Display Error Toast
-      toast.error(<p className="text-black">
-            {errorMessage}
-          </p>);
+      toast.warning(<p className="text-black">
+        {errorMessage}
+      </p>);
     }
   };
 
@@ -250,7 +253,7 @@ const Signup = () => {
               />
 
               {email.emailId && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-error text-xs md:text-sm italic animate-pulse">
                   {email.emailId}
                 </p>
               )}
@@ -260,7 +263,7 @@ const Signup = () => {
               <label className="label">Password:</label>
 
               <input
-                type="text"
+                type={showPassword ? "text" : (formData.password)}
                 className="input input-bordered w-full"
                 placeholder="Password"
                 value={formData.password}
@@ -268,9 +271,16 @@ const Signup = () => {
                 onChange={handleChange}
                 required
               />
+              <button
+                type="button"
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>
 
               {passError.password && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-error text-xs md:text-sm italic animate-pulse">
                   {passError.password}
                 </p>
               )}
@@ -311,7 +321,7 @@ const Signup = () => {
               </div>
 
               {gender.gender && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-error text-xs md:text-sm italic animate-pulse">
                   {gender.gender}
                 </p>
               )}
@@ -331,7 +341,7 @@ const Signup = () => {
               />
 
               {age.age && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-error text-xs md:text-sm italic animate-pulse">
                   {age.age}
                 </p>
               )}
@@ -340,15 +350,15 @@ const Signup = () => {
             <button
               className="
                 btn
-                bg-white
-                text-black
+                bg-blue-600
+                text-white
                 text-lg
                 w-full
                 mt-4
               "
               onClick={handleSignup}
             >
-              Signup
+              Submit
             </button>
 
             <div className="text-center pt-3">

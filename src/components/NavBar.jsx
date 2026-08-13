@@ -56,15 +56,18 @@ const NavBar = () => {
             className="
               text-xl
               sm:text-2xl
-              font-bold
+              font-semibold
               text-white
               hover:text-pink-400
               transition
               duration-300
+              border border-white px-3 rounded-sm
             "
           >
-            devTinder
+            Feed
           </Link>
+
+
         )}
       </div>
 
@@ -135,7 +138,7 @@ const NavBar = () => {
               "
             >
               <li className="mb-2">
-                <p className="text-green-500 font-bold">
+                <p className="text-green-500 font-bold text-sm">
                   {user.Fname} {user.Lname}
                 </p>
               </li>
@@ -183,11 +186,27 @@ const NavBar = () => {
                     rounded-xl
                     text-red-500
                     hover:bg-red-500/20
+                    font-semibold
                   "
                 >
                   Logout
                 </button>
               </li>
+
+              <li>
+                <Link
+                  to="/user/delete"
+                  className="
+                     rounded-xl
+                    text-red-500
+                    hover:bg-red-500/20
+                    font-semibold
+                  "
+                >
+                  Delete Account
+                </Link>
+              </li>
+
             </ul>
           </div>
         </div>

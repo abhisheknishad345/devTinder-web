@@ -33,7 +33,7 @@ const Login = () => {
     } catch (err) {
       setError(err.response?.data || "Error: Invalid credentials. Please try again.");
       if (err.response?.data) {
-        toast.error(<p className="text-black">Invalid emailId OR password</p>);
+        toast.error(<p className="text-black">invalid email/password</p>);
       }
     }
   };
@@ -94,11 +94,10 @@ const Login = () => {
 
                 <button
                   type="button"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                  className="absolute right-3 top-3 cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
-                   {/* {showPassword ? "🙈" : "👁️"} */}
                 </button>
 
               </div>

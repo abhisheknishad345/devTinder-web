@@ -9,17 +9,18 @@ const Home = () => {
   const isLoggedIn = localStorage.getItem("token");
 
   return (
-    <div className="min-h-screen flex flex-col bg-base-100 ">
+
+     <div className="min-h-screen flex flex-col bg-base-200">
 
       {/* Navbar */}
-      <div className="navbar bg-base-300 px-4 md:px-8 shadow-md sticky top-0 z-5">
+      <div className="navbar bg-base-100 px-4 md:px-8 shadow-md sticky top-0 z-5">
         
         <div className="flex-1">
           <button
             className="btn btn-ghost text-xl md:text-2xl font-bold italic text-primary"
             onClick={() => navigate("/")}
           >
-            devTinder
+            DevTinder
           </button>
         </div>
 
@@ -75,9 +76,9 @@ const Home = () => {
 
                   <button
                     className="btn btn-outline btn-lg px-10 text-lg hover:scale-105 transition-transform"
-                    onClick={() => navigate("/feed")}
+                    onClick={() => navigate("/login")}
                   >
-                    Explore Feed
+                   Let's Connect
                   </button>
                 </>
               ) : (
@@ -132,6 +133,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 
