@@ -6,7 +6,7 @@ The application provides the user-facing experience for developer discovery, pro
 
 ## Live Demo
 
-**https://dev-tinder-web-ten-ruddy.vercel.app/**
+**https://devloper-tinder.vercel.app**
 
 ## Features
 
