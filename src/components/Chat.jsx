@@ -139,7 +139,7 @@ const Chat = () => {
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           />
 
-          <button onClick={sendMessage} className="btn btn-primary px-6">
+          <button onClick={sendMessage} className="btn bg-green-500 text-black px-6">
             Send
           </button>
         </div>

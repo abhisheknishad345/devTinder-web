@@ -1,12 +1,14 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import DevFooter from "./DevFooter";
 
 const Home = () => {
   const navigate = useNavigate();
-
-  // Check user login status
-  const isLoggedIn = localStorage.getItem("token");
+  // Get user from store
+  const user = useSelector((store) => store.user);
+  const isLoggedIn = !!user;
 
   return (
 
@@ -30,14 +32,14 @@ const Home = () => {
             
             <button
               className="btn btn-ghost border-white btn-sm md:btn-md mx-2"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/auth")}
             >
               Login
             </button>
 
             <button
               className="btn btn-primary btn-sm md:btn-md"
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/auth")}
             >
               Signup
             </button>
@@ -69,14 +71,14 @@ const Home = () => {
                 <>
                   <button
                     className="btn btn-primary btn-lg px-10 text-lg shadow-lg hover:scale-105 transition-transform"
-                    onClick={() => navigate("/signup")}
+                    onClick={() => navigate("/auth")}
                   >
                     Get Started
                   </button>
 
                   <button
                     className="btn btn-outline btn-lg px-10 text-lg hover:scale-105 transition-transform"
-                    onClick={() => navigate("/login")}
+                    onClick={() => navigate("/auth")}
                   >
                    Let's Connect
                   </button>
@@ -132,6 +134,7 @@ const Home = () => {
 
         </div>
       </div>
+      <DevFooter/>
     </div>
     
   );

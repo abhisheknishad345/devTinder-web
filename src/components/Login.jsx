@@ -1,138 +1,193 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
-import { ToastContainer, toast } from "react-toastify";
-import { FaEye, FaEyeSlash,FaUser,FaLock } from "react-icons/fa";
-import { FiEyeOff, FiEye } from "react-icons/fi";
+import { toast } from "react-toastify";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const Login = () => {
-  const [emailId, setEmail] = useState("@gmail.com");
-  const [password, setPassword] = useState("@123");
-  const [error, setError] = useState("");
+const Login = ({ onSignup }) => {
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const newErrors = {};
+
+    if (!emailId.trim()) {
+      newErrors.emailId = "Email is required";
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return;
+
     try {
+      setLoading(true);
+
       const res = await axios.post(
-        BASE_URL + "/login",
-        { emailId, password },
-        { withCredentials: true }
+        `${BASE_URL}/login`,
+        {
+          emailId,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
       );
 
       dispatch(addUser(res.data.data));
-      // toast.success("Login Successful!");
-      return navigate("/feed");
 
+      toast.success("Login successful!");
+
+      navigate("/feed");
     } catch (err) {
-      setError(err.response?.data || "Error: Invalid credentials. Please try again.");
-      if (err.response?.data) {
-        toast.error(<p className="text-black">invalid email/password</p>);
-      }
+      const message =
+        err.response?.data?.message ||
+        err.response?.data ||
+        "Invalid email or password";
+
+      toast.error(
+        typeof message === "string"
+          ? message
+          : "Invalid email or password"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-      {/* Container: 
-          - min-h-[calc(100vh-64px)] adjusts for a standard navbar height
-          - px-4 for mobile breathing room
-      */}
-      <div className="min-h-[90vh] flex justify-center items-center px-4 py-10 lg:py-20">
+    <form onSubmit={handleLogin} className="space-y-5">
 
-        {/* Card: 
-            - w-full for mobile
-            - max-w-sm for small devices, md:max-w-md for larger screens
-            - Shadow and border for depth
-        */}
-        <div className="w-full max-w-sm md:max-w-md bg-base-300 rounded-2xl shadow-xl border border-white/5 p-6 md:p-10">
+      {/* Email */}
+      <div>
+        <label
+          htmlFor="login-email"
+          className="block mb-2 text-sm font-medium text-gray-300"
+        >
+          Email
+        </label>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 tracking-tight">
-            Welcome Back
-          </h2>
+        <input
+          id="login-email"
+          type="email"
+          value={emailId}
+          onChange={(e) => {
+            setEmailId(e.target.value);
+            setErrors((prev) => ({
+              ...prev,
+              emailId: "",
+            }));
+          }}
+          placeholder="xyz@example.com"
+          autoComplete="email"
+          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
+            errors.emailId
+              ? "border-red-500"
+              : "border-[#273140]"
+          } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+        />
 
-          <div className="space-y-6">
-
-            {/* Email Field */}
-            <div className="form-control w-full">
-              <label className="label">
-                <span className="label-text font-medium">Email ID</span>
-                <FaUser/>
-              </label>
-              <input
-                type="email"
-                placeholder="email@example.com"
-                value={emailId}
-                className="input input-bordered w-full focus:input-primary transition-all"
-                onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-
-            {/* Password Field */}
-            {/* Password Field */}
-            <div className="form-control w-full">
-              <label className="label">
-                <span className="label-text font-medium">Password</span>
-                <FaLock/>
-              </label>
-
-              <div className="relative">
-
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  className="input input-bordered w-full focus:input-primary transition-all pr-12"
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-                />
-
-                <button
-                  type="button"
-                  className="absolute right-3 top-3 cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
-                </button>
-
-              </div>
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <p className="text-error text-xs md:text-sm italic animate-pulse">
-                {error}
-              </p>
-            )}
-
-            {/* responsiveness done using ai  */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-4">
-              <button
-                className="btn btn-primary flex-1 text-base md:text-lg"
-                onClick={handleLogin}
-              >
-                Login
-              </button>
-
-              <button
-                className="btn btn-outline btn-secondary flex-1 text-base md:text-lg"
-                onClick={() => navigate("/signup")}
-              >
-                Sign Up
-              </button>
-            </div>
-
-          </div>
-        </div>
+        {errors.emailId && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.emailId}
+          </p>
+        )}
       </div>
 
-      {/* <ToastContainer position="bottom-right" /> */}
-    </>
+      {/* Password */}
+      <div>
+        <label
+          htmlFor="login-password"
+          className="block mb-2 text-sm font-medium text-gray-300"
+        >
+          Password
+        </label>
+
+        <div className="relative">
+
+          <input
+            id="login-password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setErrors((prev) => ({
+                ...prev,
+                password: "",
+              }));
+            }}
+            placeholder="Enter your password"
+            autoComplete="current-password"
+            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${
+              errors.password
+                ? "border-red-500"
+                : "border-[#273140]"
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowPassword((prev) => !prev)
+            }
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+          >
+            {showPassword ? (
+              <FiEyeOff size={19} />
+            ) : (
+              <FiEye size={19} />
+            )}
+          </button>
+
+        </div>
+
+        {errors.password && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.password}
+          </p>
+        )}
+      </div>
+
+      {/* Login Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full h-12 rounded-lg bg-blue-400 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-[#06101d] font-bold transition-all"
+      >
+        {loading ? "Logging in..." : "Login"}
+      </button>
+
+      {/* Signup */}
+      <div className="text-center text-sm text-gray-400">
+        Don't have an account?
+
+        <button
+          type="button"
+          onClick={onSignup}
+          className="ml-1 text-blue-400 hover:text-sky-400 font-semibold hover:underline"
+        >
+          Sign up
+        </button>
+      </div>
+
+    </form>
   );
 };
 

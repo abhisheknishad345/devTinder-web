@@ -35,9 +35,9 @@ const Delete = () => {
 
     return (
         <div className="p-4">
-            <h2 className='mb-2 text-2xl text-red-500'>Once account is deleted it cannot undo</h2>
+            <h2 className='mb-2 text-2xl text-red-500'>Once account is deleted it cannot undone</h2>
             <button
-                className="btn  text-red-400 font-bold bg-zinc-50"
+                className="btn  text-red-600 font-bold bg-gray-800 border border-red-600"
                 onClick={handleDeleteAccount}
             >
                 Delete My Account

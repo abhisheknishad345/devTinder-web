@@ -12,8 +12,6 @@ import { addUser } from "../utils/userSlice";
 const Body = () => {
 
   const navigate = useNavigate()
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
   const dispatch = useDispatch()
   const userData = useSelector((store) => store.user)
 
@@ -39,24 +37,16 @@ const Body = () => {
 
   useEffect(() => {
 
-    fetchUser()
+   fetchUser()
 
   }, [])
 
 
   return (
     <div className="body min-h-screen flex flex-col">
-
       <NavBar/>
 
-      {/* render only Homepage */}
-      {isHomePage && <Home />}
-
-      {/* Other pages */}
       <Outlet />
-
-      {/* Footer only on homepage */}
-      {isHomePage && <DevFooter />}
 
     </div>
   );

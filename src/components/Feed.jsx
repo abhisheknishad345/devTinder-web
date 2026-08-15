@@ -40,7 +40,7 @@ const Feed = () => {
     getFeedData();
   }, []);
 
-  if (!feed) {
+  if (feed.length == 0) {
     return (
       <div className="px-4 py-6">
         

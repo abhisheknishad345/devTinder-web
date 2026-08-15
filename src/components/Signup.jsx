@@ -1,398 +1,415 @@
-import { useNavigate } from "react-router-dom";
-import { BASE_URL, profileUrl } from "../utils/constants";
 import { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
-import { FiEyeOff, FiEye } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
+import { BASE_URL } from "../utils/constants";
+import { toast } from "react-toastify";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const Signup = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const [error, setError] = useState("");
-   const [showPassword, setShowPassword] = useState(false);
-
+const Signup = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     Fname: "",
     Lname: "",
-    emailId: "@gmail.com",
-    password: "@123",
-    gender: "",
+    emailId: "",
+    password: "",
+    confirmPassword: "",
     age: "",
-    profileurl: profileUrl,
-    skills: ["HTML", "CSS", "JavaScript"],
-    about: "This is default about user",
   });
 
-  const [passError, setPassErrors] = useState({});
-  const [age, setAge] = useState({});
-  const [email, setEmail] = useState({});
-  const [gender, setGender] = useState({});
-  const [profile, setProfile] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [errors, setErrors] = useState({});
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { value, name } = e.target;
+    const { name, value } = e.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
 
-    setPassErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-
-    setAge((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-
-    setEmail((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-
-    setGender((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-
-    setProfile((prev) => ({
+    setErrors((prev) => ({
       ...prev,
       [name]: "",
     }));
   };
 
-  const handleSignup = async () => {
-    const {
-      Fname,
-      Lname,
-      emailId,
-      password,
-      age,
-      gender,
-      profileurl,
-    } = formData;
+  const handleSignup = async (e) => {
+    e.preventDefault();
 
-    if (!profileurl || profileurl.length <= 9) {
-      setProfile({
-        profileurl: "Invalid profile URL",
-      });
+    const newErrors = {};
+
+    // First Name
+    if (!formData.Fname.trim()) {
+      newErrors.Fname = "First name is required";
     }
 
-    if (!Fname.trim() || !Lname.trim()) {
-      toast.warning(
-        <p className="text-red-500">
-          Please fill Firstname & Lastname
-        </p>
-      );
-
-      return;
+    // Last Name
+    if (!formData.Lname.trim()) {
+      newErrors.Lname = "Last name is required";
     }
 
-    if (!gender) {
-      setGender({
-        gender: "Please select a gender",
-      });
+    // Email
+    if (!formData.emailId.trim()) {
+      newErrors.emailId = "Email is required";
+    } else if (
+      !/^\S+@\S+\.\S+$/.test(formData.emailId)
+    ) {
+      newErrors.emailId = "Enter a valid email";
     }
 
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
-
-    if (!passwordRegex.test(password)) {
-      setPassErrors({
-        password:
-          "Password must be 8+ characters, include 1 uppercase, 1 number, 1 special character",
-      });
-
-      return;
+    // Password
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (
+      !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(
+        formData.password
+      )
+    ) {
+      newErrors.password =
+        "8+ characters with uppercase, number and special character";
     }
 
-    if (!Number(age)) {
-      setAge({
-        age: "Age required",
-      });
-
-      return;
-
-    } else if (Number(age) < 18) {
-      setAge({
-        age: "Age should be 18+",
-      });
-
-      return;
+    // Confirm Password
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword =
+        "Please confirm your password";
+    } else if (
+      formData.password !== formData.confirmPassword
+    ) {
+      newErrors.confirmPassword =
+        "Passwords do not match";
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(emailId)) {
-      setEmail({
-        emailId: "Invalid email format",
-      });
-
-      return;
+    // Age
+    if (!formData.age) {
+      newErrors.age = "Age is required";
+    } else if (Number(formData.age) < 18) {
+      newErrors.age = "Age must be 18 or above";
     }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return;
 
     try {
+      setLoading(true);
+
+      // confirmPassword backend ko nahi bhejna
+      const signupData = {
+        Fname: formData.Fname.trim(),
+        Lname: formData.Lname.trim(),
+        emailId: formData.emailId.trim(),
+        password: formData.password,
+        age: Number(formData.age),
+      };
+
       const res = await axios.post(
-        BASE_URL + "/signup",
-        { ...formData },
-        { withCredentials: true }
+        `${BASE_URL}/signup`,
+        signupData,
+        {
+          withCredentials: true,
+        }
       );
 
-      toast.success(<p className="text-black">
-        {res.message || 'Signup successful '}
-      </p>);
-      alert("Signup Successful 🚀!!");
+      dispatch(addUser(res.data.data));
 
-
-      dispatch(addUser(res?.data?.data));
+      toast.success("Account created successfully!");
 
       navigate("/feed");
-
     } catch (err) {
+      const message =
+        err.response?.data?.message ||
+        "Unable to create account";
 
-      const errorMessage = err.response?.data?.message || 'Password is weak enter strong';
-
-      // Display Error Toast
-      toast.warning(<p className="text-black">
-        {errorMessage}
-      </p>);
+      toast.error(message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-      <div
-        className="
-          min-h-screen
-          flex
-          justify-center
-          items-center
-          px-4
-          py-8
-        "
-      >
-        <div
-          className="
-            w-full
-            max-w-md
-            bg-base-300
-            rounded-3xl
-            shadow-2xl
-            border
-            border-white/10
-            p-5
-            sm:p-7
-          "
-        >
-          <p
-            className="
-              text-center
-              text-lg
-              sm:text-xl
-              mb-5
-            "
+    <form onSubmit={handleSignup} className="space-y-5">
+
+      {/* First + Last Name */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+        {/* First Name */}
+        <div>
+          <label
+            htmlFor="Fname"
+            className="block mb-2 text-sm font-medium text-gray-300"
           >
-            New User? Signup Here!
-          </p>
+            First Name
+          </label>
 
-          <h2
-            className="
-              text-3xl
-              font-bold
-              text-center
-              mb-6
-            "
-          >
-            Signup
-          </h2>
+          <input
+            id="Fname"
+            name="Fname"
+            type="text"
+            value={formData.Fname}
+            onChange={handleChange}
+            placeholder="First name"
+            autoComplete="given-name"
+            className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
+              errors.Fname
+                ? "border-red-500"
+                : "border-[#273140]"
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+          />
 
-          <div className="space-y-4">
-
-            <div>
-              <label className="label">First Name:</label>
-
-              <input
-                type="text"
-                className="input input-bordered w-full"
-                name="Fname"
-                placeholder="First Name"
-                value={formData.Fname}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="label">Last Name:</label>
-
-              <input
-                type="text"
-                className="input input-bordered w-full"
-                placeholder="Last Name"
-                name="Lname"
-                value={formData.Lname}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="label">Email Id:</label>
-
-              <input
-                type="email"
-                className="input input-bordered w-full"
-                placeholder="Email"
-                value={formData.emailId}
-                name="emailId"
-                onChange={handleChange}
-                required
-              />
-
-              {email.emailId && (
-                <p className="text-error text-xs md:text-sm italic animate-pulse">
-                  {email.emailId}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="label">Password:</label>
-
-              <input
-                type={showPassword ? "text" : (formData.password)}
-                className="input input-bordered w-full"
-                placeholder="Password"
-                value={formData.password}
-                name="password"
-                onChange={handleChange}
-                required
-              />
-              <button
-                type="button"
-                className="absolute right-3 top-3 cursor-pointer"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FiEyeOff /> : <FiEye />}
-              </button>
-
-              {passError.password && (
-                <p className="text-error text-xs md:text-sm italic animate-pulse">
-                  {passError.password}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="label">Gender:</label>
-
-              <div
-                className="
-                  flex
-                  flex-wrap
-                  gap-6
-                  mt-2
-                "
-              >
-                <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="Male"
-                    className="radio"
-                    onChange={handleChange}
-                  />
-                  Male
-                </label>
-
-                <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="Female"
-                    className="radio"
-                    onChange={handleChange}
-                  />
-                  Female
-                </label>
-              </div>
-
-              {gender.gender && (
-                <p className="text-error text-xs md:text-sm italic animate-pulse">
-                  {gender.gender}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="label">Age:</label>
-
-              <input
-                type="number"
-                className="input input-bordered w-full"
-                placeholder="Age"
-                value={formData.age}
-                name="age"
-                onChange={handleChange}
-                required
-              />
-
-              {age.age && (
-                <p className="text-error text-xs md:text-sm italic animate-pulse">
-                  {age.age}
-                </p>
-              )}
-            </div>
-
-            <button
-              className="
-                btn
-                bg-blue-600
-                text-white
-                text-lg
-                w-full
-                mt-4
-              "
-              onClick={handleSignup}
-            >
-              Submit
-            </button>
-
-            <div className="text-center pt-3">
-              <p className="text-sm sm:text-base">
-                Existing User?
-              </p>
-
-              <button
-                className="
-                  btn
-                  bg-green-500
-                  text-black
-                  w-full
-                  mt-3
-                  text-base
-                  sm:text-lg
-                "
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </button>
-            </div>
-
-            {error && (
-              <p className="text-red-500 text-sm text-center">
-                {error}
-              </p>
-            )}
-          </div>
+          {errors.Fname && (
+            <p className="mt-1 text-xs text-red-400">
+              {errors.Fname}
+            </p>
+          )}
         </div>
+
+        {/* Last Name */}
+        <div>
+          <label
+            htmlFor="Lname"
+            className="block mb-2 text-sm font-medium text-gray-300"
+          >
+            Last Name
+          </label>
+
+          <input
+            id="Lname"
+            name="Lname"
+            type="text"
+            value={formData.Lname}
+            onChange={handleChange}
+            placeholder="Last name"
+            autoComplete="family-name"
+            className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
+              errors.Lname
+                ? "border-red-500"
+                : "border-[#273140]"
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+          />
+
+          {errors.Lname && (
+            <p className="mt-1 text-xs text-red-400">
+              {errors.Lname}
+            </p>
+          )}
+        </div>
+
       </div>
 
-      <ToastContainer />
-    </>
+      {/* Email */}
+      <div>
+
+        <label
+          htmlFor="signup-email"
+          className="block mb-2 text-sm font-medium text-gray-300"
+        >
+          Email
+        </label>
+
+        <input
+          id="signup-email"
+          name="emailId"
+          type="email"
+          value={formData.emailId}
+          onChange={handleChange}
+          placeholder="xyz@example.com"
+          autoComplete="email"
+          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
+            errors.emailId
+              ? "border-red-500"
+              : "border-[#273140]"
+          } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+        />
+
+        {errors.emailId && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.emailId}
+          </p>
+        )}
+
+      </div>
+
+      {/* Password */}
+      <div>
+
+        <label
+          htmlFor="signup-password"
+          className="block mb-2 text-sm font-medium text-gray-300"
+        >
+          Password
+        </label>
+
+        <div className="relative">
+
+          <input
+            id="signup-password"
+            name="password"
+            type={
+              showPassword ? "text" : "password"
+            }
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Create a password"
+            autoComplete="new-password"
+            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${
+              errors.password
+                ? "border-red-500"
+                : "border-[#273140]"
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowPassword((prev) => !prev)
+            }
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+          >
+            {showPassword ? (
+              <FiEyeOff size={19} />
+            ) : (
+              <FiEye size={19} />
+            )}
+          </button>
+
+        </div>
+
+        {errors.password && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.password}
+          </p>
+        )}
+
+      </div>
+
+      {/* Confirm Password */}
+      <div>
+
+        <label
+          htmlFor="confirmPassword"
+          className="block mb-2 text-sm font-medium text-gray-300"
+        >
+          Confirm Password
+        </label>
+
+        <div className="relative">
+
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type={
+              showConfirmPassword
+                ? "text"
+                : "password"
+            }
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="Confirm your password"
+            autoComplete="new-password"
+            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${
+              errors.confirmPassword
+                ? "border-red-500"
+                : "border-[#273140]"
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowConfirmPassword(
+                (prev) => !prev
+              )
+            }
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+          >
+            {showConfirmPassword ? (
+              <FiEyeOff size={19} />
+            ) : (
+              <FiEye size={19} />
+            )}
+          </button>
+
+        </div>
+
+        {errors.confirmPassword && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.confirmPassword}
+          </p>
+        )}
+
+      </div>
+
+      {/* Age */}
+      <div>
+
+        <label
+          htmlFor="age"
+          className="block mb-2 text-sm font-medium text-gray-300"
+        >
+          Age
+        </label>
+
+        <input
+          id="age"
+          name="age"
+          type="number"
+          min="18"
+          max="100"
+          value={formData.age}
+          onChange={handleChange}
+          placeholder="Enter your age"
+          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
+            errors.age
+              ? "border-red-500"
+              : "border-[#273140]"
+          } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+        />
+
+        {errors.age && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.age}
+          </p>
+        )}
+
+      </div>
+
+      {/* Signup Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full h-12 rounded-lg bg-blue-400 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-[#06101d] font-bold transition-all"
+      >
+        {loading
+          ? "Creating account..."
+          : "Create Account"}
+      </button>
+
+      {/* Login */}
+      <div className="text-center text-sm text-gray-400">
+
+        Already have an account?
+
+        <button
+          type="button"
+          onClick={onLogin}
+          className="ml-1 text-blue-400 hover:text-sky-400 font-semibold hover:underline"
+        >
+          Login
+        </button>
+
+      </div>
+
+    </form>
   );
 };
 
