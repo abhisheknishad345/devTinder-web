@@ -7,14 +7,6 @@ import { useLocation } from "react-router-dom";
 const DevFooter = () => {
   const location = useLocation();
 
-  // Hide footer on login and signup pages
-  if (
-    location.pathname === "/login" ||
-    location.pathname === "/signup"
-  ) {
-    return null;
-  }
-
   return (
     <footer
       className="
