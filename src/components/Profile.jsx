@@ -190,7 +190,7 @@ const Profile = ({ newUser }) => {
             <button
               className="
                 btn
-                bg-white
+                bg-green-500
                 text-black
                 text-lg
                 font-semibold
@@ -201,7 +201,7 @@ const Profile = ({ newUser }) => {
               "
               onClick={saveProfile}
             >
-              Save Profile
+              Update Profile
             </button>
           </fieldset>
         </div>

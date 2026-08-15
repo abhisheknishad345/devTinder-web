@@ -7,6 +7,8 @@ import { BASE_URL } from "../utils/constants";
 import ShimmerCard from "./ShimmerCard";
 import UserCard from "./userCard";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const Feed = () => {
   const feed = useSelector((state) => state.feed);
@@ -28,9 +30,10 @@ const Feed = () => {
       const cleanFeed = res?.data?.data;
 
       dispatch(addFeed(cleanFeed));
+      toast.success("Login/Signup successful!");
 
     } catch (err) {
-      console.log("Error fetching feed data:",err?.response?.data);
+      console.log("Error fetching feed data:", err?.response?.data);
 
       navigate("/login");
     }
@@ -43,7 +46,7 @@ const Feed = () => {
   if (feed.length == 0) {
     return (
       <div className="px-4 py-6">
-        
+
         <h2
           className="
             text-2xl
@@ -123,6 +126,12 @@ const Feed = () => {
           <UserCard newUser={feed[0]} />
         )}
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="dark"
+      />
     </div>
   );
 };

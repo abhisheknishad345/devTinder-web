@@ -11,8 +11,6 @@ import { addUser } from "../utils/userSlice";
 
 const Body = () => {
 
-  console.log("Please Login");
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const userData = useSelector((store) => store.user)
@@ -27,7 +25,7 @@ const Body = () => {
 
     } catch (err) {
      
-      if (err.response?.status === 401) {
+      if (err.response?.status === 401 || 400) {
         console.log(err?.response?.data);
         navigate("/")
       }

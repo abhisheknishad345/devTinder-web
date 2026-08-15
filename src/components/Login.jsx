@@ -147,7 +147,7 @@ const Login = ({ onSignup }) => {
             onClick={() =>
               setShowPassword((prev) => !prev)
             }
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
           >
             {showPassword ? (
               <FiEyeOff size={19} />
@@ -169,7 +169,7 @@ const Login = ({ onSignup }) => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full h-12 rounded-lg bg-blue-400 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-[#06101d] font-bold transition-all"
+        className="w-full h-12 rounded-lg bg-green-600 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-[#06101d] font-bold transition-all cursor-pointer"
       >
         {loading ? "Logging in..." : "Login"}
       </button>
@@ -181,7 +181,7 @@ const Login = ({ onSignup }) => {
         <button
           type="button"
           onClick={onSignup}
-          className="ml-1 text-blue-400 hover:text-sky-400 font-semibold hover:underline"
+          className="ml-1 text-blue-400 hover:text-sky-400 font-semibold hover:underline cursor-pointer"
         >
           Sign up
         </button>

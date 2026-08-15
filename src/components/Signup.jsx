@@ -273,7 +273,7 @@ const Signup = ({ onLogin }) => {
             onClick={() =>
               setShowPassword((prev) => !prev)
             }
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
           >
             {showPassword ? (
               <FiEyeOff size={19} />
@@ -330,7 +330,7 @@ const Signup = ({ onLogin }) => {
                 (prev) => !prev
               )
             }
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
           >
             {showConfirmPassword ? (
               <FiEyeOff size={19} />
@@ -387,7 +387,7 @@ const Signup = ({ onLogin }) => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full h-12 rounded-lg bg-blue-400 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-[#06101d] font-bold transition-all"
+        className="w-full h-12 rounded-lg bg-green-600 hover:bg-sky-400 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed text-[#06101d] font-bold transition-all"
       >
         {loading
           ? "Creating account..."
@@ -402,7 +402,7 @@ const Signup = ({ onLogin }) => {
         <button
           type="button"
           onClick={onLogin}
-          className="ml-1 text-blue-400 hover:text-sky-400 font-semibold hover:underline"
+          className="ml-1 text-blue-400 hover:text-sky-400 font-semibold hover:underline cursor-pointer"
         >
           Login
         </button>
