@@ -30,7 +30,7 @@ const Feed = () => {
       const cleanFeed = res?.data?.data;
 
       dispatch(addFeed(cleanFeed));
-      toast.success("Signup successful!");
+      toast.success("Login successful!");
 
     } catch (err) {
       console.log("Error fetching feed data:", err?.response?.data);

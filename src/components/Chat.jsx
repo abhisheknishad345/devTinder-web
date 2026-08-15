@@ -38,7 +38,7 @@ const Chat = () => {
 
     socket.on("messageReceived", ({ Fname, text }) => {
       setMessages((prevMessages) => [...prevMessages, { Fname, text }]);
-       console.log(Fname + " :  " + text);
+      //  console.log(Fname + " :  " + text);
     });
 
     return () => {
@@ -62,8 +62,8 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-base-300 p-4">
-      <div className="w-full max-w-2xl h-[75vh] border border-base-200 shadow-2xl rounded-2xl flex flex-col overflow-hidden bg-base-100">
+    <div className="flex items-center justify-center h-screen bg-gray-800 p-4">
+      <div className="w-full max-w-2xl h-[75vh] border border-white shadow-2xl rounded-2xl flex flex-col overflow-hidden bg-base-100">
         
         {/* Header */}
         <div className="bg-violet-500 text-primary-content px-5 py-4 flex items-center gap-3 shadow-md">
@@ -110,15 +110,17 @@ const Chat = () => {
                 </div>
 
                 <div
-                  className={`chat-bubble wrap-break max-w-[80%] ${
-                    isMe ? "chat-bubble-primary" : "chat-bubble-secondary"
+                  className={`chat-bubble text-white wrap-break max-w-[80%] ${
+                    isMe ? " bg-green-700" : "bg-gray-700"
                   }`}
                 >
                   {msg.text}
                 </div>
 
-                <div className="chat-footer opacity-50 text-[10px] mt-1">
-                  Delivered
+                <div className="chat-footer opacity-70 text-[10px] mt-1">
+                  {isMe ? "Delivered": "Received"}
+                  
+                 
                 </div>
               </div>
             );

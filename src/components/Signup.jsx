@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Signup = ({ onLogin }) => {
@@ -408,6 +408,9 @@ const Signup = ({ onLogin }) => {
         </button>
 
       </div>
+
+      <ToastContainer/>
+
 
     </form>
   );
