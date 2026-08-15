@@ -30,12 +30,12 @@ const Feed = () => {
       const cleanFeed = res?.data?.data;
 
       dispatch(addFeed(cleanFeed));
-      toast.success("Login/Signup successful!");
+      toast.success("Signup successful!");
 
     } catch (err) {
       console.log("Error fetching feed data:", err?.response?.data);
 
-      navigate("/login");
+      navigate("/auth");
     }
   };
 
@@ -126,12 +126,7 @@ const Feed = () => {
           <UserCard newUser={feed[0]} />
         )}
       </div>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        theme="dark"
-      />
+      <ToastContainer />
     </div>
   );
 };

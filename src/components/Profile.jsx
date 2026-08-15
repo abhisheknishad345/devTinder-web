@@ -227,8 +227,7 @@ const Profile = ({ newUser }) => {
           />
         </div>
       </div>
-
-      <ToastContainer />
+      <ToastContainer/>
     </>
   );
 };

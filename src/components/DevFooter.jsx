@@ -14,7 +14,7 @@ const DevFooter = () => {
         border-t
         border-white/10
         text-white
-        mt-20
+        mt-2
       "
     >
 

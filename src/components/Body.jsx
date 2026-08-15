@@ -8,6 +8,8 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { toast } from "react-toastify";
+
 
 const Body = () => {
 
@@ -26,7 +28,8 @@ const Body = () => {
     } catch (err) {
      
       if (err.response?.status === 401 || 400) {
-        console.log(err?.response?.data);
+        console.log("Login/Signup Krle Lodu !!");
+        toast.info("Login/Signup to explore !!")
         navigate("/")
       }
       
@@ -44,7 +47,7 @@ const Body = () => {
 
   return (
     <div className="body min-h-screen flex flex-col">
-      <NavBar/>
+     {userData && <NavBar/>}
 
       <Outlet />
 

@@ -193,7 +193,7 @@ const Delete = () => {
 
                     <button
                         type="button"
-                        onClick={()=> navigate(-1)}
+                        onClick={() => navigate(-1)}
                         className="w-full
           mt-6
           h-12
@@ -206,13 +206,13 @@ const Delete = () => {
           cursor-pointer
         "
                     >
-                       Cancel
+                        Cancel
                     </button>
 
                 </div>
                 <ToastContainer
                     position="top-right"
-                    autoClose={3000}
+                    autoClose={2000}
                     theme="dark"
                 />
 

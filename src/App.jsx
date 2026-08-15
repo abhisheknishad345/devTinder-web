@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { ToastContainer } from "react-toastify";
 
 import Body from "./components/Body"
 import Profile from "./components/Profile"
@@ -36,6 +37,12 @@ function App() {
 
           </Route>
         </Routes>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          theme="dark"
+        />
 
       </BrowserRouter>
 
