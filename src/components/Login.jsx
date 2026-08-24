@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
-import { BASE_URL } from "../utils/constants";
+import api from "../utils/axios";
 import { toast } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
@@ -40,8 +40,8 @@ const Login = ({ onSignup }) => {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${BASE_URL}/login`,
+      const res = await api.post(
+        "/login",
         {
           emailId,
           password,

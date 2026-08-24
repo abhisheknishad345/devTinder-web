@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DevFooter from "./DevFooter";
+import DevStats from "./DevStats";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,19 +16,22 @@ const Home = () => {
      <div className="min-h-screen flex flex-col bg-base-200">
 
       {/* Navbar */}
+       {!isLoggedIn && ( 
       <div className="navbar bg-base-100 px-4 md:px-8 shadow-md sticky top-0 z-5">
         
         <div className="flex-1">
+         
           <button
             className="btn btn-ghost text-xl md:text-2xl font-bold italic text-primary"
             onClick={() => navigate("/")}
           >
             DevTinder
           </button>
+       
         </div>
 
         {/* Hide Login & Signup after login */}
-        {!isLoggedIn && (
+      
           <div className="flex-none gap-2 ">
             
             <button
@@ -41,12 +45,12 @@ const Home = () => {
               className="btn btn-primary btn-sm md:btn-md"
               onClick={() => navigate("/auth")}
             >
-              Signup
+              Sign Up
             </button>
 
           </div>
-        )}
       </div>
+        )}
 
       {/* Hero Section */}
       <div className="hero grow bg-linear-to-b from-base-300 to-base-100 px-4">
@@ -82,6 +86,7 @@ const Home = () => {
                   >
                    Let's Connect
                   </button>
+                 
                 </>
               ) : (
                 <button
@@ -134,7 +139,8 @@ const Home = () => {
 
         </div>
       </div>
-      <DevFooter/>
+      <DevStats/>
+    { !isLoggedIn && <DevFooter/>}
     </div>
     
   );

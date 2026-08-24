@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
-import { BASE_URL } from "../utils/constants";
+import api from "../utils/axios";
 import { toast, ToastContainer } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
@@ -112,8 +112,8 @@ const Signup = ({ onLogin }) => {
         age: Number(formData.age),
       };
 
-      const res = await axios.post(
-        `${BASE_URL}/signup`,
+      const res = await api.post(
+        "/signup",
         signupData,
         {
           withCredentials: true,

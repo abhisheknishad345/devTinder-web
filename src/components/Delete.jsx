@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { BASE_URL } from "../utils/constants.js"
+import api from "../utils/axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../utils/userSlice"; // Action to clear state
@@ -33,8 +33,8 @@ const Delete = () => {
         if (!confirmDelete) return;
 
         try {
-            const res = await axios.delete(
-                BASE_URL + "/user/delete",
+            const res = await api.delete(
+                "/user/delete",
                 {
                     data: { password },
                     withCredentials: true

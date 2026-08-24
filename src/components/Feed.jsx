@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import api from "../utils/axios";
 import ShimmerCard from "./ShimmerCard";
 import UserCard from "./userCard";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +20,8 @@ const Feed = () => {
     if (feed && feed.length > 0) return;
 
     try {
-      const res = await axios.get(
-        BASE_URL + "/feed",
+      const res = await api.get(
+        "/feed",
         {
           withCredentials: true,
         }

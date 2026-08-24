@@ -1,11 +1,9 @@
 
 /****** *******/
 
-import React from "react";
 import { useLocation } from "react-router-dom";
 
 const DevFooter = () => {
-  const location = useLocation();
 
   return (
     <footer
@@ -14,7 +12,7 @@ const DevFooter = () => {
         border-t
         border-white/10
         text-white
-        mt-2
+        mt-1
       "
     >
 

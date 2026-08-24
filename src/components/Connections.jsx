@@ -1,12 +1,10 @@
 
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
-import Chat from "./Chat"
 import { Link } from "react-router-dom";
-
+import api from "../utils/axios";
 const Connections = () => {
   const connection = useSelector((store) => store.connection);
 
@@ -14,8 +12,8 @@ const Connections = () => {
 
   const fetchConnections = async () => {
     try {
-      const res = await axios.get(
-        BASE_URL + "/user/connections",
+      const res = await api.get(
+        "/user/connections",
         { withCredentials: true }
       );
 

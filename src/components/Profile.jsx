@@ -2,7 +2,7 @@
 import { useState } from "react";
 import UserCard from "./userCard";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../utils/constants";
+import api from "../utils/axios";
 import { addUser } from "../utils/userSlice";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -27,8 +27,8 @@ const Profile = ({ newUser }) => {
     try {
       setError("");
 
-      const res = await axios.put(
-        BASE_URL + "/profile/update",
+      const res = await api.put(
+        "/profile/update",
         { Fname, Lname, gender, profileurl, age, skills, about },
         { withCredentials: true }
       );
