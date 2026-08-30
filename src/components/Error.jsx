@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const HandleError = () => {
   const navigate = useNavigate();
-  console.log("Bakchodi mt kr lode");
+  console.log("Bakchodi na kre Janab");
 
   return (
     <main className="min-h-screen bg-[#070a0f] text-white flex items-center justify-center px-4">

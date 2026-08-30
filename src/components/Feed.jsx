@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
-import axios from "axios";
 import api from "../utils/axios";
 import ShimmerCard from "./ShimmerCard";
 import UserCard from "./userCard";

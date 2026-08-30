@@ -1,5 +1,4 @@
 
-import axios from "axios";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";

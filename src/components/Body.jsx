@@ -1,7 +1,6 @@
 
-import { Outlet, useNavigate,useLocation } from "react-router-dom";
+import { Outlet, useNavigate} from "react-router-dom";
 import NavBar from "./NavBar";
-import axios from 'axios';
 import api from "../utils/axios";
 
 import { useEffect } from "react";
@@ -27,8 +26,8 @@ const Body = () => {
     } catch (err) {
      
       if (err.response?.status === 401 || 400) {
-        console.log("Login/Signup Krle Lodu !!");
-        toast.info("Login/Signup to explore !!")
+        console.log("Please Login/Signup!");
+        toast.info("Login/Signup to explore more !")
         navigate("/")
       }
       

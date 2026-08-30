@@ -14,6 +14,7 @@ import Chat from "./components/Chat"
 import Delete from "./components/Delete"
 import Auth from "./components/Auth"
 import Home from "./components/Home"
+import Post from "./components/Post";
 function App() {
 
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/chat/:targetUserId" element={<Chat />} />
             <Route path="/user/delete" element={<Delete />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/post" element={<Post />} />
 
 
           </Route>

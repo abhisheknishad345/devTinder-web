@@ -41,11 +41,11 @@ const ServerWakeUp = ({ children }) => {
                     DevTinder
                 </h1>
 
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 mt-2 font-medium">
                     Server is waking up...
                 </p>
 
-                <p className="text-sm text-gray-400 mt-1">
+                <p className=" text-gray-400 mt-1 font-medium font-mono">
                     This may take a few seconds
                 </p>
             </div>

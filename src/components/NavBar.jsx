@@ -1,7 +1,6 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import api from "../utils/axios";
 import { removeUser } from "../utils/userSlice";
 

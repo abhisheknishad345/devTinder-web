@@ -4,7 +4,6 @@ import UserCard from "./userCard";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../utils/axios";
 import { addUser } from "../utils/userSlice";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 const Profile = ({ newUser }) => {
