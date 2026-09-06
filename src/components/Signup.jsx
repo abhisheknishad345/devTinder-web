@@ -50,11 +50,15 @@ const Signup = ({ onLogin }) => {
     // First Name
     if (!formData.Fname.trim()) {
       newErrors.Fname = "First name is required";
+    } else if (formData.Fname.trim().length < 3) {
+      newErrors.Fname = "First name should be at least 3 characters";
     }
 
     // Last Name
     if (!formData.Lname.trim()) {
       newErrors.Lname = "Last name is required";
+    } else if (formData.Lname.trim().length < 3) {
+      newErrors.Lname = "Last name should be at least 3 characters";
     }
 
     // Email
@@ -159,11 +163,10 @@ const Signup = ({ onLogin }) => {
             onChange={handleChange}
             placeholder="First name"
             autoComplete="given-name"
-            className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
-              errors.Fname
+            className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.Fname
                 ? "border-red-500"
                 : "border-[#273140]"
-            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+              } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
           {errors.Fname && (
@@ -190,11 +193,10 @@ const Signup = ({ onLogin }) => {
             onChange={handleChange}
             placeholder="Last name"
             autoComplete="family-name"
-            className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
-              errors.Lname
+            className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.Lname
                 ? "border-red-500"
                 : "border-[#273140]"
-            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+              } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
           {errors.Lname && (
@@ -224,11 +226,10 @@ const Signup = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="xyz@example.com"
           autoComplete="email"
-          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
-            errors.emailId
+          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.emailId
               ? "border-red-500"
               : "border-[#273140]"
-          } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
         />
 
         {errors.emailId && (
@@ -261,11 +262,10 @@ const Signup = ({ onLogin }) => {
             onChange={handleChange}
             placeholder="Create a password"
             autoComplete="new-password"
-            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${
-              errors.password
+            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${errors.password
                 ? "border-red-500"
                 : "border-[#273140]"
-            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+              } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
           <button
@@ -316,11 +316,10 @@ const Signup = ({ onLogin }) => {
             onChange={handleChange}
             placeholder="Confirm your password"
             autoComplete="new-password"
-            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${
-              errors.confirmPassword
+            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${errors.confirmPassword
                 ? "border-red-500"
                 : "border-[#273140]"
-            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+              } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
           <button
@@ -368,11 +367,10 @@ const Signup = ({ onLogin }) => {
           value={formData.age}
           onChange={handleChange}
           placeholder="Enter your age"
-          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
-            errors.age
+          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.age
               ? "border-red-500"
               : "border-[#273140]"
-          } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
         />
 
         {errors.age && (
@@ -409,7 +407,7 @@ const Signup = ({ onLogin }) => {
 
       </div>
 
-      <ToastContainer/>
+      <ToastContainer />
 
 
     </form>

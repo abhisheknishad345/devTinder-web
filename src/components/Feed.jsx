@@ -125,7 +125,10 @@ const Feed = () => {
           <UserCard newUser={feed[0]} />
         )}
       </div>
-      <ToastContainer />
+      <ToastContainer 
+      position="top-left"
+      autoClose={1000}
+      />
     </div>
   );
 };
