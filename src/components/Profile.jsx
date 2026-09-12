@@ -125,7 +125,8 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2">Gender:</label>
+            <label className="label mt-2">Gender: Can be 'Male' | 'Female' | 'Other'</label>
+            
 
             <input
               type="text"

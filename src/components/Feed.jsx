@@ -42,6 +42,23 @@ const Feed = () => {
     getFeedData();
   }, []);
 
+
+   if (feed.length === 0) {
+    return (
+      <p
+        className="
+          text-xl
+          font-semibold
+          text-center
+          mt-6
+          px-4
+        "
+      >
+        No new users found!
+      </p>
+    );
+  }
+
   if (feed.length == 0) {
     return (
       <div className="px-4 py-6">
@@ -57,41 +74,10 @@ const Feed = () => {
         >
           Feed is Loading...
         </h2>
-
-        <div
-          className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-3
-            gap-6
-            max-w-7xl
-            mx-auto
-          "
-        >
-          {[...Array(3)].map((_, i) => (
-            <ShimmerCard key={i} />
-          ))}
-        </div>
       </div>
     );
   }
 
-  if (feed.length === 0) {
-    return (
-      <p
-        className="
-          text-xl
-          font-semibold
-          text-center
-          mt-6
-          px-4
-        "
-      >
-        No new users found!
-      </p>
-    );
-  }
 
   return (
     <div
