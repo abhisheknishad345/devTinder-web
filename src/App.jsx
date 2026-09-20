@@ -15,8 +15,9 @@ import Delete from "./components/Delete"
 import Auth from "./components/Auth"
 import Home from "./components/Home"
 import Post from "./components/Post";
-function App() {
+import Todo from "./components/Todo"
 
+function App() {
 
   return (
     <>
@@ -35,13 +36,14 @@ function App() {
             <Route path="/user/delete" element={<Delete />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/post" element={<Post />} />
+            <Route path="/todo" element={<Todo />} />
 
 
           </Route>
         </Routes>
 
         <ToastContainer
-          position="top-right"
+          position="top-center"
           autoClose={1000}
           theme="dark"
         />

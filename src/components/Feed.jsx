@@ -112,8 +112,8 @@ const Feed = () => {
         )}
       </div>
       <ToastContainer 
-      position="top-left"
-      autoClose={1000}
+      position="top-center"
+      autoClose={1500}
       />
     </div>
   );

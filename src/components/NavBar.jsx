@@ -1,4 +1,3 @@
-
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../utils/axios";
@@ -21,14 +20,12 @@ const NavBar = () => {
       dispatch(removeUser());
 
       return navigate("/");
-
     } catch (err) {
       console.error("Logout error:", err);
 
       if (err.status === 400 || err.status === 401) {
         dispatch(removeUser());
-
-        return navigate("/login");
+        return navigate("/auth");
       }
     }
   };
@@ -37,7 +34,7 @@ const NavBar = () => {
     <div
       className="
         navbar
-        bg-black/40
+        bg-[#020617]/85
         backdrop-blur-xl
         border-b
         border-white/10
@@ -46,48 +43,97 @@ const NavBar = () => {
         sticky
         top-0
         z-50
+        min-h-[72px]
       "
     >
+      {/* ================= LOGO ================= */}
       <div className="flex-1">
         {user && (
           <Link
-            to="/feed"
+            to="/"
             className="
-              text-xl
-              sm:text-2xl
-              font-semibold
-              text-white
-              hover:text-pink-400
+              text-2xl
+              font-extrabold
+              tracking-tight
+              no-underline
               transition
               duration-300
-              border border-white px-3 rounded-sm
+              hover:opacity-90
             "
           >
-            Feed
+            <span className="text-cyan-400">Dev</span>
+            <span className="text-white">Tinder</span>
           </Link>
-
-
         )}
       </div>
 
+      {/* ================= CENTER NAVIGATION ================= */}
       {user && (
-        <div className="flex items-center gap-2 sm:gap-4">
-          
-          <p
-            className="
-              hidden
-              sm:block
+        <div className="hidden md:flex items-center gap-2">
+          <Link
+            to="/feed"
+            className=" border
+              rounded-xl
+              px-5
+              py-2.5
               text-sm
-              md:text-lg
-              text-white
               font-semibold
+              text-slate-300
+              transition
+              duration-300
+              hover:bg-cyan-400/10
+              hover:text-cyan-300
             "
           >
-            Welcome {user.Fname}
-          </p>
+            Discover
+          </Link>
 
+          <Link
+            to="/connections"
+            className=" border
+              rounded-xl
+              px-5
+              py-2.5
+              text-sm
+              font-semibold
+              text-slate-300
+              transition
+              duration-300
+              hover:bg-cyan-400/10
+              hover:text-cyan-300
+            "
+          >
+            Connections
+          </Link>
+        </div>
+      )}
+
+      {/*  RIGHT SIDE  */}
+      {user && (
+        <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
+          <button
+            onClick={() => navigate("/feed")}
+            className="
+              hidden
+              lg:block
+              rounded-xl
+              border
+              border-cyan-400/30
+              bg-cyan-400/5
+              px-4
+              py-2.5
+              text-sm
+              font-semibold
+              text-cyan-300
+              transition cursor-pointer
+              hover:bg-cyan-400/10
+            "
+          >
+            Go to Feed
+          </button>
+
+          {/* User profile dropdown */}
           <div className="dropdown dropdown-end">
-            
             <div
               tabIndex={0}
               role="button"
@@ -137,7 +183,7 @@ const NavBar = () => {
               "
             >
               <li className="mb-2">
-                <p className="text-green-500 font-bold text-sm">
+                <p className="text-cyan-400 font-bold text-sm">
                   {user.Fname} {user.Lname}
                 </p>
               </li>
@@ -145,10 +191,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/profile/view"
-                  className="
-                    rounded-xl
-                    hover:bg-white/10
-                  "
+                  className="rounded-xl hover:bg-white/10"
                 >
                   Profile
                 </Link>
@@ -157,10 +200,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/connections"
-                  className="
-                    rounded-xl
-                    hover:bg-white/10
-                  "
+                  className="rounded-xl hover:bg-white/10"
                 >
                   Connections
                 </Link>
@@ -169,10 +209,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/request"
-                  className="
-                    rounded-xl
-                    hover:bg-white/10
-                  "
+                  className="rounded-xl hover:bg-white/10"
                 >
                   Requests
                 </Link>
@@ -196,7 +233,7 @@ const NavBar = () => {
                 <Link
                   to="/user/delete"
                   className="
-                     rounded-xl
+                    rounded-xl
                     text-red-500
                     hover:bg-red-500/20
                     font-semibold
@@ -205,7 +242,6 @@ const NavBar = () => {
                   Delete Account
                 </Link>
               </li>
-
             </ul>
           </div>
         </div>

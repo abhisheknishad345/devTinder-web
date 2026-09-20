@@ -40,10 +40,6 @@ const Profile = ({ newUser }) => {
 
       setShowToast(true);
 
-      setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-
     } catch (err) {
       const errorMessage =
         err.response?.data ||
@@ -227,7 +223,8 @@ const Profile = ({ newUser }) => {
           />
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer
+      autoClose={1500}/>
     </>
   );
 };
