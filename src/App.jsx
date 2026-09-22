@@ -14,8 +14,10 @@ import Chat from "./components/Chat"
 import Delete from "./components/Delete"
 import Auth from "./components/Auth"
 import Home from "./components/Home"
+import PostFeed from "./components/PostFeed";
 import Post from "./components/Post";
 import Todo from "./components/Todo"
+import MyPost from "./components/MyPost";
 
 function App() {
 
@@ -36,6 +38,8 @@ function App() {
             <Route path="/user/delete" element={<Delete />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/post" element={<Post />} />
+            <Route path="/mypost" element={<MyPost />} />
+            <Route path="/postfeed" element={<PostFeed />} />
             <Route path="/todo" element={<Todo />} />
 
 

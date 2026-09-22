@@ -50,19 +50,16 @@ const NavBar = () => {
       <div className="flex-1">
         {user && (
           <Link
-            to="/"
+            to="/feed"
             className="
-              text-2xl
-              font-extrabold
-              tracking-tight
+              text-xl
+              font-semibold
               no-underline
-              transition
-              duration-300
-              hover:opacity-90
+               border p-2 rounded-xl
             "
           >
-            <span className="text-cyan-400">Dev</span>
-            <span className="text-white">Tinder</span>
+            <span className="text-cyan-400">Feed</span>
+            
           </Link>
         )}
       </div>
@@ -194,6 +191,24 @@ const NavBar = () => {
                   className="rounded-xl hover:bg-white/10"
                 >
                   Profile
+                </Link>
+              </li>
+
+               <li>
+                <Link
+                  to="/postfeed"
+                  className="rounded-xl hover:bg-white/10"
+                >
+                  Others Post
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/mypost"
+                  className="rounded-xl hover:bg-white/10"
+                >
+                  My Post
                 </Link>
               </li>
 
