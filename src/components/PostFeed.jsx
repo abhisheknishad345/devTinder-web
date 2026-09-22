@@ -46,7 +46,7 @@ const PostFeed = () => {
 
 
     return (
-        <div className="w-2/3 mx-auto py-6 px-4">
+        <div className="w-full mx-auto py-6 px-4">
 
 
             {/* Posts Feed*/}

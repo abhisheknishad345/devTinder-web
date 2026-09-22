@@ -207,20 +207,20 @@ const PostCard = ({ post }) => {
                     <div className="mt-4 border-t pt-4">
 
                         {/* Comment Input */}
-                        <div className="gap-2">
+                        <div className="gap-2 flex">
 
-                            <input
-                                type="text"
+                            <textarea
                                 value={commentText}
                                 onChange={(e) => setCommentText(e.target.value)}
                                 placeholder="Write a comment..."
-                                className="flex-1 border rounded-lg px-3 py-2 outline-none"
+                                rows={1}
+                                className="flex-1 border rounded-lg px-3 py-2 outline-none resize-none max-h-32 overflow-y-auto"
                             />
 
                             <button
                                 onClick={handleComment}
                                 disabled={commentLoading || !commentText.trim()}
-                                className="bg-cyan-500 text-white px-4 py-2 rounded-lg disabled:opacity-50 cursor-pointer ml-2 mt-2"
+                                className="bg-cyan-500 text-black px-4 py-2 rounded-lg disabled:opacity-50 cursor-pointer ml-2 mt-2"
                             >
                                 {commentLoading ? "..." : "Send"}
                             </button>
@@ -244,15 +244,21 @@ const PostCard = ({ post }) => {
                                             className="w-10 h-10 rounded-full object-cover"
                                         />
 
+                                        <div>
                                         <p className="text-sm font-semibold text-slate-400">
                                             {comment.user?.Fname} {comment.user?.Lname}
                                         </p>
+
+                                        <p className="text-sm text-gray-300">
+                                        {new Date(post.createdAt).toLocaleString()}
+                                        </p>
+                                        </div>
 
                                     </div>
 
 
 
-                                    <p className="text-sm text-white/75 mt-2 font-medium font-mono">
+                                    <p className="text-sm text-white/75 mt-2 font-medium font-sans">
                                         {comment.text}
                                     </p>
 
