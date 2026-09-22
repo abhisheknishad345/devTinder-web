@@ -55,7 +55,7 @@ const MyPost = () => {
 
     return (
         <div className="p-2">
-            <h1 className="font-medium font-mono text-2xl capitalize mb-2 text-center">
+            <h1 className="font-medium font-mono text-2xl capitalize mb-2 text-center text-green-400">
                 Create & See all your posts
             </h1>
             {/* Create Post */}

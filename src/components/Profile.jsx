@@ -1,10 +1,11 @@
 
 import { useState } from "react";
-import UserCard from "./userCard";
+import ProfileCard from "./ProfileCard";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../utils/axios";
 import { addUser } from "../utils/userSlice";
 import { ToastContainer, toast } from "react-toastify";
+import {SquarePen} from "lucide-react"
 
 const Profile = ({ newUser }) => {
   const [Fname, setFname] = useState(newUser.Fname);
@@ -17,7 +18,6 @@ const Profile = ({ newUser }) => {
   const [about, setAbout] = useState(newUser.about);
 
   const [error, setError] = useState("");
-  const [settoast, setShowToast] = useState(false);
 
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -38,7 +38,6 @@ const Profile = ({ newUser }) => {
         <p className="text-black">{res?.data?.message}</p>
       );
 
-      setShowToast(true);
 
     } catch (err) {
       const errorMessage =
@@ -94,10 +93,11 @@ const Profile = ({ newUser }) => {
             "
           >
             <h2 className="text-2xl font-bold text-center mb-4">
+              <SquarePen size={25}/>
               Edit Profile
             </h2>
 
-            <label className="label">First Name:</label>
+            <label className="label text-gray-300 text-md">First Name:</label>
 
             <input
               type="text"
@@ -109,7 +109,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2">Last Name:</label>
+            <label className="label mt-2 text-gray-300 text-md">Last Name:</label>
 
             <input
               type="text"
@@ -121,7 +121,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2">Gender: Can be 'Male' | 'Female' | 'Other'</label>
+            <label className="label mt-2 text-gray-300 text-md">Gender: Can be 'Male' | 'Female' | 'Other'</label>
             
 
             <input
@@ -133,7 +133,7 @@ const Profile = ({ newUser }) => {
               onChange={(e) => setGender(e.target.value)}
             />
 
-            <label className="label mt-2">Age:</label>
+            <label className="label mt-2 text-gray-300 text-md">Age:</label>
 
             <input
               type="number"
@@ -145,7 +145,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2">Profile URL:</label>
+            <label className="label mt-2 text-gray-300 text-md">Profile URL:</label>
 
             <input
               type="text"
@@ -157,7 +157,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2">Skills:</label>
+            <label className="label mt-2 text-gray-300 text-md">Skills:</label>
 
             <textarea
               name="skills"
@@ -169,7 +169,7 @@ const Profile = ({ newUser }) => {
               }
             ></textarea>
 
-            <label className="label mt-2">About:</label>
+            <label className="label mt-2 text-gray-300 text-md">About:</label>
 
             <textarea
               name="about"
@@ -210,7 +210,7 @@ const Profile = ({ newUser }) => {
             xl:w-auto
           "
         >
-          <UserCard
+          <ProfileCard
             newUser={{
               Fname,
               Lname,

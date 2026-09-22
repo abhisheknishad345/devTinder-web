@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../utils/axios";
+import { ThumbsUp, ThumbsDown, MessageSquareText, Heart, MessageSquare } from "lucide-react";
 
 const PostCard = ({ post }) => {
 
@@ -118,7 +119,7 @@ const PostCard = ({ post }) => {
     };
 
     return (
-        <div className=" rounded-xl shadow p-4 mb-4 border">
+        <div className=" rounded-xl shadow p-4 mb-4 border border-green-500">
 
             {/* Author */}
             <div className="flex items-center gap-3">
@@ -164,45 +165,41 @@ const PostCard = ({ post }) => {
 
 
             {/* Counts */}
-            <div className="flex gap-5 text-md text-gray-300 mt-4">
 
-                <span>
-                    ❤️ {likes}
-                </span>
-
-                <span>
-                    👎 {dislikes}
-                </span>
-
-                <span>
-                    💬 {post.comments?.length || 0}
-                </span>
-
-            </div>
-
-
-            {/* Actions - temporarily */}
-            <div className=" border-t mt-3 pt-3 gap-2">
+            <div className="flex items-center gap-6 border-t pt-3 mt-4">
 
                 <button
                     onClick={handleLike}
-                    disabled={likeLoading}
-                    className="flex-1 py-2 rounded-lg hover:bg-gray-500 cursor-pointer px-2">
-                    ❤️ Like
+                    className="flex items-center gap-2  hover:text-pink-500 cursor-pointer"
+                >
+                    <Heart size={22} />
+                    <span>{likes}</span>
+                    {/* <span>Like</span> */}
                 </button>
 
                 <button
                     onClick={handleDislike}
-                    disabled={dislikeLoading}
-                    className="flex-1 py-2 rounded-lg hover:bg-gray-500 cursor-pointer px-2">
-                    👎 Dislike
+                    className="flex items-center gap-2 hover:text-red-500 cursor-pointer"
+                >
+                    <ThumbsDown size={22} />
+                    <span>{dislikes}</span>
+                    {/* <span>Dislike</span> */}
                 </button>
 
                 <button
                     onClick={() => setShowComments(!showComments)}
-                    className="flex-1 py-2 rounded-lg hover:bg-gray-500 cursor-pointer px-2">
-                    💬 Comment
+                    className="flex items-center gap-2 hover:text-cyan-500 cursor-pointer"
+                >
+                    <MessageSquareText size={22} />
+                    <span>{comments.length}</span>
+                    {/* <span>Comment</span> */}
                 </button>
+
+            </div>
+
+            {/* Actions - temporarily */}
+            <div className=" pt-3 gap-2">
+
                 {showComments && (
                     <div className="mt-4 border-t pt-4">
 
@@ -220,9 +217,9 @@ const PostCard = ({ post }) => {
                             <button
                                 onClick={handleComment}
                                 disabled={commentLoading || !commentText.trim()}
-                                className="bg-cyan-500 text-black px-4 py-2 rounded-lg disabled:opacity-50 cursor-pointer ml-2 mt-2"
+                                className="bg-cyan-500 text-black px-4 py-2 rounded-lg disabled:opacity-50 cursor-pointer ml-2 mt-2 font-semibold"
                             >
-                                {commentLoading ? "..." : "Send"}
+                                {commentLoading ? "Sending" : "SEND"}
                             </button>
 
                         </div>
@@ -245,13 +242,13 @@ const PostCard = ({ post }) => {
                                         />
 
                                         <div>
-                                        <p className="text-sm font-semibold text-slate-400">
-                                            {comment.user?.Fname} {comment.user?.Lname}
-                                        </p>
+                                            <p className="text-sm font-semibold text-slate-400">
+                                                {comment.user?.Fname} {comment.user?.Lname}
+                                            </p>
 
-                                        <p className="text-sm text-gray-300">
-                                        {new Date(post.createdAt).toLocaleString()}
-                                        </p>
+                                            <p className="text-sm text-gray-300">
+                                                {new Date(post.createdAt).toLocaleString()}
+                                            </p>
                                         </div>
 
                                     </div>

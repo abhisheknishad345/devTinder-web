@@ -1,11 +1,7 @@
 
-import api from "../utils/axios";
-import { useDispatch } from "react-redux";
-import { removeFeed } from "../utils/feedSlice";
 
-const UserCard = ({ newUser }) => {
+const ProfileCard = ({ newUser }) => {
   const {
-    _id,
     Fname,
     Lname,
     age,
@@ -14,23 +10,6 @@ const UserCard = ({ newUser }) => {
     about,
     skills,
   } = newUser;
-
-  const dispatch = useDispatch();
-
-  const handleFeed = async (status, userId) => {
-    try {
-      await api.post(
-        "/request/send/" + status + "/" + userId,
-        {},
-        { withCredentials: true }
-      );
-
-      dispatch(removeFeed(userId));
-
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
     <div
@@ -115,47 +94,9 @@ const UserCard = ({ newUser }) => {
           {about || "About not available"}
         </p>
 
-        <div
-          className="
-            flex
-            flex-col
-            sm:flex-row
-            justify-center
-            gap-4
-            mt-6
-          "
-        >
-          <button
-            className="
-              btn
-              btn-primary
-              w-full
-              sm:w-auto
-              text-base
-              sm:text-lg
-            "
-            onClick={() => handleFeed("ignored", _id)}
-          >
-            Ignore
-          </button>
-
-          <button
-            className="
-              btn
-              btn-secondary
-              w-full
-              sm:w-auto
-              text-base
-              sm:text-lg
-            "
-            onClick={() => handleFeed("interested", _id)}
-          >
-            Interested
-          </button>
-        </div>
       </div>
     </div>
   );
 };
 
-export default UserCard;
+export default ProfileCard;

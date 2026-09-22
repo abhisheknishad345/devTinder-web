@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import api from "../utils/axios";
+import {Camera, X} from "lucide-react"
 
 
 const Post = ({ onPostCreated }) => {
@@ -83,7 +84,7 @@ const Post = ({ onPostCreated }) => {
 
     return (
         <div className="rounded-xl shadow p-4">
-            <h1 className="font-medium font-mono text-2xl capitalize mb-2 ">Post your thought</h1>
+            <h1 className="font-medium font-mono text-2xl capitalize mb-2 text-pink-400">Post your thought</h1>
 
             <form onSubmit={handleSubmit}>
 
@@ -100,6 +101,8 @@ const Post = ({ onPostCreated }) => {
                 {preview && (
                     <div className="relative mt-3">
 
+                        <h1 className="text-center mb-2 font-semibold">Preview</h1>
+
                         <img
                             src={preview}
                             alt="Preview"
@@ -109,9 +112,9 @@ const Post = ({ onPostCreated }) => {
                         <button
                             type="button"
                             onClick={removeImage}
-                            className="absolute top-2 right-2 bg-white cursor-pointer text-black rounded-full px-3 py-1"
+                            className="absolute top-2 right-2 bg-white cursor-pointer text-black rounded-full px-3 py-1 hover:text-red-500"
                         >
-                            ✕
+                            <X size={21}/>
                         </button>
 
                     </div>
@@ -122,9 +125,13 @@ const Post = ({ onPostCreated }) => {
                 <div className="flex items-center justify-between mt-4">
 
                     {/* Image button */}
-                    <label className="cursor-pointer">
+                    <label className="cursor-pointer flex items-center gap-2 hover:text-pink-400">
 
-                        📷 Add Image
+                        <Camera size={22}/>
+                        <span>
+
+                        Add Image
+                        </span>
 
                         <input
                             type="file"
@@ -140,9 +147,9 @@ const Post = ({ onPostCreated }) => {
                     <button
                         type="submit"
                         disabled={loading || (!content.trim() && !image)}
-                        className="bg-white text-black px-5 py-2 rounded-lg disabled:opacity-90 cursor-pointer"
+                        className="bg-white text-black font-semibold px-3 py-2 rounded-lg disabled:opacity-90 cursor-pointer"
                     >
-                        {loading ? "Posting..." : "Post"}
+                        {loading ? "Posting..." : "POST"}
                     </button>
 
                 </div>
