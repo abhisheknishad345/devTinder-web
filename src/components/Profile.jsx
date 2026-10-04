@@ -94,7 +94,7 @@ const Profile = ({ newUser }) => {
           >
             <h2 className="text-2xl font-bold text-center mb-4">
               <SquarePen size={25}/>
-              Edit Profile
+              Update your profile
             </h2>
 
             <label className="label text-gray-300 text-md">First Name:</label>

@@ -119,7 +119,7 @@ const PostCard = ({ post }) => {
     };
 
     return (
-        <div className=" rounded-xl shadow p-4 mb-4 border border-green-500">
+        <div className="w-full max-w-2xl mx-auto rounded-xl shadow p-4 mb-4 border border-green-500">
 
             {/* Author */}
             <div className="flex items-center gap-3">
@@ -159,7 +159,7 @@ const PostCard = ({ post }) => {
                 <img
                     src={post.image.url}
                     alt="Post"
-                    className="w-full max-h-[500px] object-cover rounded-lg mt-4"
+                    className="w-full max-h-[700px] object-cover rounded-lg mt-4"
                 />
             )}
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addUser } from "../utils/userSlice";
+
 import api from "../utils/axios";
 import { toast, ToastContainer } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -18,14 +18,12 @@ const Signup = ({ onLogin }) => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const [errors, setErrors] = useState({});
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -124,11 +122,13 @@ const Signup = ({ onLogin }) => {
         }
       );
 
-      dispatch(addUser(res.data.data));
+      toast.success("OTP sent to your email!");
 
-      toast.success("Account created successfully!");
-
-      navigate("/feed");
+      navigate("/verify-email", {
+        state: {
+          emailId: formData.emailId.trim(),
+        },
+      });
     } catch (err) {
       const message =
         err.response?.data?.message ||
@@ -164,8 +164,8 @@ const Signup = ({ onLogin }) => {
             placeholder="First name"
             autoComplete="given-name"
             className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.Fname
-                ? "border-red-500"
-                : "border-[#273140]"
+              ? "border-red-500"
+              : "border-[#273140]"
               } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
@@ -194,8 +194,8 @@ const Signup = ({ onLogin }) => {
             placeholder="Last name"
             autoComplete="family-name"
             className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.Lname
-                ? "border-red-500"
-                : "border-[#273140]"
+              ? "border-red-500"
+              : "border-[#273140]"
               } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
@@ -227,8 +227,8 @@ const Signup = ({ onLogin }) => {
           placeholder="xyz@example.com"
           autoComplete="email"
           className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.emailId
-              ? "border-red-500"
-              : "border-[#273140]"
+            ? "border-red-500"
+            : "border-[#273140]"
             } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
         />
 
@@ -263,8 +263,8 @@ const Signup = ({ onLogin }) => {
             placeholder="Create a password"
             autoComplete="new-password"
             className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${errors.password
-                ? "border-red-500"
-                : "border-[#273140]"
+              ? "border-red-500"
+              : "border-[#273140]"
               } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
@@ -317,8 +317,8 @@ const Signup = ({ onLogin }) => {
             placeholder="Confirm your password"
             autoComplete="new-password"
             className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${errors.confirmPassword
-                ? "border-red-500"
-                : "border-[#273140]"
+              ? "border-red-500"
+              : "border-[#273140]"
               } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
@@ -368,8 +368,8 @@ const Signup = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Enter your age"
           className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.age
-              ? "border-red-500"
-              : "border-[#273140]"
+            ? "border-red-500"
+            : "border-[#273140]"
             } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
         />
 

@@ -61,6 +61,24 @@ const Login = ({ onSignup }) => {
         err.response?.data ||
         "Invalid email or password";
 
+      // Email is not verified
+      if (
+        err.response?.status === 403 &&
+        message === "Please verify your email first"
+      ) {
+        toast.error(message);
+
+        setTimeout(() => {
+          navigate("/verify-email", {
+            state: {
+              emailId: emailId.trim(),
+            },
+          });
+        }, 800);
+
+        return;
+      }
+
       toast.error(
         typeof message === "string"
           ? message
@@ -96,11 +114,10 @@ const Login = ({ onSignup }) => {
           }}
           placeholder="xyz@example.com"
           autoComplete="email"
-          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${
-            errors.emailId
-              ? "border-red-500"
-              : "border-[#273140]"
-          } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+          className={`w-full h-12 px-4 rounded-lg bg-[#0b1017] border ${errors.emailId
+            ? "border-red-500"
+            : "border-[#273140]"
+            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
         />
 
         {errors.emailId && (
@@ -134,11 +151,10 @@ const Login = ({ onSignup }) => {
             }}
             placeholder="Enter your password"
             autoComplete="current-password"
-            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${
-              errors.password
-                ? "border-red-500"
-                : "border-[#273140]"
-            } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
+            className={`w-full h-12 px-4 pr-12 rounded-lg bg-[#0b1017] border ${errors.password
+              ? "border-red-500"
+              : "border-[#273140]"
+              } text-white placeholder:text-gray-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/10 transition`}
           />
 
           <button
@@ -172,6 +188,23 @@ const Login = ({ onSignup }) => {
       >
         {loading ? "Logging in..." : "Login"}
       </button>
+      <div className="flex justify-end mt-2">
+        <button
+          type="button"
+          onClick={() => navigate("/forgot-password")}
+          className="
+      text-xs
+      sm:text-sm
+      text-blue-400
+      hover:text-sky-400
+      font-medium
+      hover:underline
+      transition cursor-pointer
+    "
+        >
+          Forgot Password?
+        </button>
+      </div>
 
       {/* Signup */}
       <div className="text-center text-sm text-gray-400">

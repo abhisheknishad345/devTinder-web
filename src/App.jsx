@@ -18,6 +18,9 @@ import PostFeed from "./components/PostFeed";
 import Post from "./components/Post";
 import Todo from "./components/Todo"
 import MyPost from "./components/MyPost";
+import VerifyEmail from "./components/VerifyEmail";
+import ResetPassword from "./components/ResetPassword";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
 
@@ -41,6 +44,9 @@ function App() {
             <Route path="/mypost" element={<MyPost />} />
             <Route path="/postfeed" element={<PostFeed />} />
             <Route path="/todo" element={<Todo />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
 
           </Route>
@@ -48,8 +54,9 @@ function App() {
 
         <ToastContainer
           position="top-center"
-          autoClose={1000}
+          autoClose={1500}
           theme="dark"
+          style={{fontSize:12}}
         />
 
       </BrowserRouter>

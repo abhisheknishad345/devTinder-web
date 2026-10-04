@@ -6,8 +6,6 @@ import api from "../utils/axios";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { toast } from "react-toastify";
-
 
 const Body = () => {
 
@@ -27,7 +25,6 @@ const Body = () => {
      
       if (err.response?.status === 401 || 400) {
         console.log("Please Login/Signup!");
-        toast.info("Login/Signup to explore more !")
         navigate("/")
       }
       
