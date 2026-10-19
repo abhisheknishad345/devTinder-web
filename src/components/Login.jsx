@@ -6,6 +6,8 @@ import { addUser } from "../utils/userSlice";
 import api from "../utils/axios";
 import { toast } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import  GoogleAuth  from "./GoogleAuth";
+
 
 const Login = ({ onSignup }) => {
   const [emailId, setEmailId] = useState("");
@@ -219,6 +221,8 @@ const Login = ({ onSignup }) => {
         </button>
       </div>
 
+        <GoogleAuth/>
+     
     </form>
   );
 };
