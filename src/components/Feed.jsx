@@ -82,21 +82,22 @@ const Feed = () => {
   return (
     <div
       className="
-        min-h-screen
+        h-full
         px-4
-        py-6
+       
       "
     >
       <h2
         className="
-          text-2xl
+          text-xl
           md:text-3xl
-          font-bold
+          font-semibold
           text-center
-          mb-8
+          mb-2
+          text-yellow-500
         "
       >
-        Suggested Feed For You
+        Suggested Feed
       </h2>
 
       <div
@@ -104,7 +105,7 @@ const Feed = () => {
           flex
           justify-center
           items-center
-          pb-20
+          
         "
       >
         {feed.length > 0 && (

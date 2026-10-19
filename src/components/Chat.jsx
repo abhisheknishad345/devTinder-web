@@ -109,7 +109,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-800 p-4">
+    <div className="flex items-center justify-center h-full bg-gray-800 py-8">
       <div className="w-full max-w-2xl h-[75vh] border border-white shadow-2xl rounded-2xl flex flex-col overflow-hidden bg-base-100">
 
         {/* Header */}
@@ -126,7 +126,7 @@ const Chat = () => {
 
           <div>
             <h2 className="font-bold text-lg capitalize">Chat</h2>
-            <p className="text-xs opacity-80">Online</p>
+            <p>Support only text and emoji</p>
           </div>
         </div>
 
