@@ -7,5 +7,7 @@ const SERVER_URL =
 
 export const createSocketConnection = () =>{
     
-    return io(SERVER_URL)
+    return io(SERVER_URL, 
+      { withCredentials: true }
+     )
 }

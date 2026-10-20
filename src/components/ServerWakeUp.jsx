@@ -6,7 +6,7 @@ const ServerWakeUp = ({ children }) => {
     const [status, setStatus] = useState("waking");
     const [attempt, setAttempt] = useState(0);
 
-    const MAX_ATTEMPTS = 3;
+    const MAX_ATTEMPTS = 5;
 
     const checkServer = async () => {
         try {
@@ -65,12 +65,13 @@ const ServerWakeUp = ({ children }) => {
 
                 <button
                     onClick={() => {
-                        setAttempt(0);
-                        setStatus("waking");
+                    window.location.reload();
+                    setAttempt(0);
+                    setStatus("waking");
                     }}
-                    className="btn btn-primary mt-5"
+                    className="mt-5 border-2  text-lg p-2 rounded-2xl font-semibold cursor-pointer"
                 >
-                    Try Again
+                    Refresh
                 </button>
             </div>
         );
