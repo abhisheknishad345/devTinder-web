@@ -2,12 +2,16 @@
 import { GoogleLogin } from "@react-oauth/google";
 import api from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 import { useState } from "react";
 
 
 const GoogleAuth = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [error, setError] = useState("");
+
   const handleGoogleSuccess = async (credentialResponse) => {
     setError("");
 
@@ -21,8 +25,8 @@ const GoogleAuth = () => {
           withCredentials: true,
         }
       );
-
-      console.log("Login successful", res.data);
+     
+      dispatch(addUser(res.data))
 
       // Navigate to your feed page here
       navigate("/feed", { replace: true });
