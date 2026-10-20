@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   server: {
-  proxy: { "/api": { target: "http://localhost:5700", rewrite: (p) => p.replace(/^\/api/, "") } }
+  proxy: { "/api": { target: "https://devtinder-rsj5.onrender.com", rewrite: (p) => p.replace(/^\/api/, "") } }
 },
   plugins: [react(),
     tailwindcss()
