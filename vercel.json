@@ -1,5 +1,9 @@
+
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://devtinder-rsj5.onrender.com/:path*" }
+    {
+      "source": "/api/:path*",
+      "destination": "https://devtinder-rsj5.onrender.com/:path*"
+    }
   ]
 }
