@@ -58,8 +58,11 @@ const Requestpage = () => {
 
             <div className="flex flex-col gap-5 items-center">
                 {request.map((requests) => {
+                    if (!requests?.fromUserId) {
+                        return null; 
+                    }
+
                     const {
-                        _id,
                         Fname,
                         Lname,
                         age,
@@ -70,7 +73,7 @@ const Requestpage = () => {
 
                     return (
                         <div
-                            key={_id}
+                            key={requests._id}
                             className="
                 w-full
                 sm:w-[90%]
