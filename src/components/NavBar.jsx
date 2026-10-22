@@ -52,13 +52,16 @@ const NavBar = () => {
           <Link
             to="/feed"
             className="
-              text-xl
+              text-lg
               font-semibold
+              font-mono
               no-underline
-               border p-2 rounded-xl
+              border-2  p-2 rounded-xl
+              
+               
             "
           >
-            <span className="text-cyan-400">Feed</span>
+            <span className="text-white">feed</span>
             
           </Link>
         )}
@@ -108,26 +111,6 @@ const NavBar = () => {
       {/*  RIGHT SIDE  */}
       {user && (
         <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
-          <button
-            onClick={() => navigate("/feed")}
-            className="
-              hidden
-              lg:block
-              rounded-xl
-              border
-              border-cyan-400/30
-              bg-cyan-400/5
-              px-4
-              py-2.5
-              text-sm
-              font-semibold
-              text-cyan-300
-              transition cursor-pointer
-              hover:bg-cyan-400/10
-            "
-          >
-            Go to Feed
-          </button>
 
           {/* User profile dropdown */}
           <div className="dropdown dropdown-end">
@@ -190,7 +173,7 @@ const NavBar = () => {
                   to="/profile/view"
                   className="rounded-xl hover:bg-white/10"
                 >
-                  Profile
+                Update Profile
                 </Link>
               </li>
 

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { ToastContainer } from "react-toastify";
 
 import Body from "./components/Body"
-import Profile from "./components/Profile"
 import EditProfile from "./components/EditProfile"
 import Feed from "./components/Feed"
 import HandleError from "./components/Error"
@@ -56,7 +55,7 @@ function App() {
           position="top-center"
           autoClose={1500}
           theme="dark"
-          style={{fontSize:12}}
+          style={{fontSize:14}}
         />
 
       </BrowserRouter>

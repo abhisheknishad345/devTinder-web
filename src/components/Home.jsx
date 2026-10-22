@@ -1,6 +1,8 @@
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const featuredDevelopers = [
   {
@@ -27,6 +29,11 @@ const Home = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const isLoggedIn = !!user;
+
+  useEffect( ()=> {
+    toast.info("For the best experience, please switch to Dark Mode");
+  }, [])
+
 
   return (
     <div className="min-h-screen bg-[#020617] text-white">
