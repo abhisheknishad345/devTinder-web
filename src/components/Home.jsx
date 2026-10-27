@@ -165,7 +165,7 @@ const Home = () => {
       </section>
 
       {/* WHY DEVTINDER */}
-      <section id="why" className="border-t border-neutral-800 px-5 py-24 lg:px-8">
+      <section id="why" className="border-t border-neutral-800 px-5 py-15 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">Why DevTinder</p>
@@ -198,7 +198,7 @@ const Home = () => {
       </section>
 
       {/* FEATURED DEVELOPERS */}
-      <section id="developers" className="border-t border-neutral-800 px-5 py-24 lg:px-8">
+      <section id="developers" className="border-t border-neutral-800 px-5 py-15 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
@@ -254,7 +254,7 @@ const Home = () => {
       </section>
 
       {/* FIND YOUR MATCH */}
-      <section className="border-t border-neutral-800 px-5 py-24 lg:px-8">
+      <section className="border-t border-neutral-800 px-5 py-15 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">Find Your Match</p>
@@ -291,7 +291,7 @@ const Home = () => {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="border-t border-neutral-800 px-5 py-24 lg:px-8">
+      <section id="how" className="border-t border-neutral-800 px-5 py-15 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">How It Works</p>
@@ -350,7 +350,7 @@ const Home = () => {
 
             <button
               onClick={() => navigate("/auth")}
-              className="mt-8 cursor-pointer font-mono rounded-lg bg-green-500 px-8 py-4 font-semibold text-neutral-950 transition hover:bg-neutral-200"
+              className="mt-8 cursor-pointer font-mono rounded-lg bg-green-500 px-8 py-4 font-bold text-neutral-950 transition hover:bg-neutral-200"
             >
               Join DevTinder
             </button>
@@ -362,9 +362,10 @@ const Home = () => {
       {!isLoggedIn && (
         <footer className="border-t border-neutral-400 px-5 py-8 lg:px-8">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 md:flex-row">
-            <button onClick={() => navigate("/")} className="cursor-pointer text-xl text-green-600 font-bold">
-              DevTinder
+            <button onClick={() => navigate("/")} className="cursor-pointer font-mono text-md text-green-600 font-bold">
+              Abhishek Nishad
             </button>
+           
             <p className="text-md ">Connect. Collaborate. Grow.</p>
             <p className="text-md ">© 2026 DevTinder</p>
           </div>
