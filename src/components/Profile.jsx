@@ -10,7 +10,6 @@ import {SquarePen} from "lucide-react"
 const Profile = ({ newUser }) => {
   const [Fname, setFname] = useState(newUser.Fname);
   const [Lname, setLname] = useState(newUser.Lname);
-  const [password, setPassword] = useState(newUser.password);
   const [gender, setGender] = useState(newUser.gender);
   const [profileurl, setProfileurl] = useState(newUser.profileurl);
   const [age, setAge] = useState(newUser.age);
@@ -97,11 +96,11 @@ const Profile = ({ newUser }) => {
               Update your profile
             </h2>
 
-            <label className="label text-gray-300 text-md">First Name:</label>
+            <label className="label text-gray-300 text-[15px]">First Name:</label>
 
             <input
               type="text"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-[14px]"
               name="Fname"
               placeholder="First Name"
               value={Fname}
@@ -109,11 +108,11 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2 text-gray-300 text-md">Last Name:</label>
+            <label className="label mt-2 text-gray-300  text-[15px]">Last Name:</label>
 
             <input
               type="text"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-[14px]"
               placeholder="Last Name"
               name="Lname"
               value={Lname}
@@ -121,7 +120,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2 text-gray-300 text-md">Gender: Can be 'Male' | 'Female' | 'Other'</label>
+            <label className="label mt-2 text-green-500 text-[15px]">Gender: Can be 'Male' | 'Female' | 'Other'</label>
             
 
             <input
@@ -129,15 +128,15 @@ const Profile = ({ newUser }) => {
               name="gender"
               value={gender}
               placeholder="Gender"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-[14px]"
               onChange={(e) => setGender(e.target.value)}
             />
 
-            <label className="label mt-2 text-gray-300 text-md">Age:</label>
+            <label className="label mt-2 text-gray-300  text-[15px]">Age:</label>
 
             <input
               type="number"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-[14px]"
               placeholder="Age"
               name="age"
               value={age}
@@ -145,7 +144,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2 text-gray-300 text-md">Profile URL:</label>
+            <label className="label mt-2 text-green-500 text-[15px]">Profile URL:</label>
 
             <input
               type="text"
@@ -157,7 +156,7 @@ const Profile = ({ newUser }) => {
               required
             />
 
-            <label className="label mt-2 text-gray-300 text-md">Skills:</label>
+            <label className="label mt-2 text-gray-300 text-[15px]">Skills:</label>
 
             <textarea
               name="skills"
@@ -169,7 +168,7 @@ const Profile = ({ newUser }) => {
               }
             ></textarea>
 
-            <label className="label mt-2 text-gray-300 text-md">About:</label>
+            <label className="label mt-2 text-gray-300 text-[15px]">About:</label>
 
             <textarea
               name="about"

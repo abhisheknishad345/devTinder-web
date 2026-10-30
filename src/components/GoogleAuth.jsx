@@ -25,8 +25,10 @@ const GoogleAuth = () => {
           withCredentials: true,
         }
       );
+
+      console.log("Response",res);
      
-      dispatch(addUser(res.data))
+      dispatch(addUser(res?.data?.user))
 
       // Navigate to your feed page here
       navigate("/feed", { replace: true });

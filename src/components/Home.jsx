@@ -3,6 +3,24 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
+const profileCard = [
+  {
+    name: "John Doe",
+    role: "MERN Developer",
+    skills: ["React", "Node.js", "MongoDB"],
+    image: "https://images.unsplash.com/photo-1603575448878-868a20723f5d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+
+  },
+  {
+    
+    name: "Helena Dee",
+    role: "Frontend Developer",
+    skills: ["React", "TypeScript", "UI/UX"],
+    image: "https://plus.unsplash.com/premium_photo-1663127037157-5710981bc7b7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+
+  }
+]
+
 const featuredDevelopers = [
   {
     name: "Oliver Smith",
@@ -79,9 +97,9 @@ const Home = () => {
         <div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-12 px-5 py-10 lg:grid-cols-2 lg:px-8">
           <div>  
 
-            <h1 className="mb-2 text-rose-500 text-[18px] animate-bounce font-mono font-semibold"> For Better Experience, Switch Your Device to Dark Mode</h1>
+            <h1 className="mb-2 text-gray-300 text-[18px] animate-bounce font-mono font-semibold"> For Better Experience, Switch Your Device to Dark Mode</h1>
 
-            <div className="mb-7 inline-flex items-center italic font-mono rounded-full border-2 border-teal-700 px-4 py-2 text-sm text-white">
+            <div className="mb-7 inline-flex items-center italic font-mono rounded-full border-2 border-teal-700 px-4 py-2 text-sm text-blue-400">
               Built for Developers
             </div>
 
@@ -131,8 +149,8 @@ const Home = () => {
 
           {/* Hero visual */}
           <div className="mx-auto w-full max-w-[560px]">
-            <div className="grid grid-cols-2 gap-4">
-              {featuredDevelopers.slice(0, 2).map((developer) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {profileCard.slice(0, 2).map((developer) => (
                 <div
                   key={developer.name}
                   className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 p-3"
@@ -269,7 +287,7 @@ const Home = () => {
 
             <button
               onClick={() => navigate(isLoggedIn ? "/feed" : "/auth")}
-              className="mt-8 cursor-pointer font-mono rounded-lg bg-green-500 px-7 py-4 font-semibold text-neutral-950 transition hover:bg-neutral-200"
+              className="mt-8 cursor-pointer font-mono rounded-lg bg-green-500 px-7 py-4 font-bold text-neutral-950 transition hover:bg-neutral-200"
             >
               Start Discovering
             </button>

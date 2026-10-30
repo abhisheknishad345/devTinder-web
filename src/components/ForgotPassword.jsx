@@ -60,7 +60,7 @@ const ForgotPassword = () => {
               Forgot Password?
             </h2>
 
-            <p className="mt-1 text-xs sm:text-sm text-gray-400 leading-relaxed">
+            <p className="mt-1 text-lg text-start sm:text-sm text-gray-300 leading-relaxed">
               Enter your registered email and we'll send you an OTP to reset your password.
             </p>
           </div>

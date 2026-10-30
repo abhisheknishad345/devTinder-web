@@ -35,7 +35,7 @@ const ProfileCard = ({ newUser }) => {
             sm:h-36
             object-cover
             border-4
-            border-white
+            border-green-500
             rounded-full
             shadow-lg
           "
@@ -52,6 +52,7 @@ const ProfileCard = ({ newUser }) => {
             font-bold
             text-center
             wrap-break-words
+            text-green-500
           "
         >
           {Fname ? `${Fname} ${Lname || ""}` : "User Name"}
@@ -60,11 +61,12 @@ const ProfileCard = ({ newUser }) => {
         <p
           className="
             text-center
-            text-gray-400
-            mt-1
+            text-gray-200
+            mt-1 font-mono
+            text-[16px]
           "
         >
-          {age ? `${age} ${gender || ""}` : "Age not available"}
+          {age ? `${age} Year, ${gender || ""}` : "Age not available"}
         </p>
 
         <p

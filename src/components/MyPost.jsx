@@ -46,8 +46,8 @@ const MyPost = () => {
 
     if (loading) {
         return (
-            <div className="text-center mt-10">
-                Loading feed...
+            <div className="text-center mt-10 font-semibold">
+                Loading Posts...
             </div>
         );
     }
@@ -65,8 +65,8 @@ const MyPost = () => {
 
                 {posts.length === 0 ? (
 
-                    <p className="text-center text-gray-500">
-                        No posts available.
+                    <p className="text-center text-xl text-gray-200">
+                        No posts available
                     </p>
 
                 ) : (

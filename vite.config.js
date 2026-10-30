@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://devtinder-rsj5.onrender.com",
+        target: "http://localhost:5700",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

@@ -1,9 +1,8 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import api from "../utils/axios";
-import ShimmerCard from "./ShimmerCard";
 import UserCard from "./userCard";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -11,12 +10,12 @@ import { ToastContainer } from "react-toastify";
 
 const Feed = () => {
   const feed = useSelector((state) => state.feed);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const getFeedData = async () => {
-    if (feed && feed.length > 0) return;
 
     try {
       const res = await api.get(
@@ -35,6 +34,8 @@ const Feed = () => {
       console.log("Error fetching feed data:", err?.response?.data);
 
       navigate("/auth");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -42,8 +43,27 @@ const Feed = () => {
     getFeedData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="px-4 py-6">
 
-   if (feed.length === 0) {
+        <h2
+          className="
+            text-2xl
+            md:text-3xl
+            font-semibold
+            text-center
+            mb-8
+          "
+        >
+          Feed is Loading...
+        </h2>
+      </div>
+    );
+  }
+
+
+   if (!feed || feed.length === 0) {
     return (
       <p
         className="
@@ -59,24 +79,6 @@ const Feed = () => {
     );
   }
 
-  if (feed.length == 0) {
-    return (
-      <div className="px-4 py-6">
-
-        <h2
-          className="
-            text-2xl
-            md:text-3xl
-            font-bold
-            text-center
-            mb-8
-          "
-        >
-          Feed is Loading...
-        </h2>
-      </div>
-    );
-  }
 
 
   return (
@@ -94,7 +96,7 @@ const Feed = () => {
           font-semibold
           text-center
           mb-2
-          text-yellow-500
+          text-teal-500
         "
       >
         Suggested Feed
@@ -104,13 +106,11 @@ const Feed = () => {
         className="
           flex
           justify-center
-          items-center
-          
+          items-center 
         "
       >
-        {feed.length > 0 && (
-          <UserCard newUser={feed[0]} />
-        )}
+        <UserCard newUser={feed[0]} />
+        
       </div>
       <ToastContainer 
       position="top-center"

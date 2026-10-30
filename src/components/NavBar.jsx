@@ -72,7 +72,7 @@ const NavBar = () => {
         <div className="hidden md:flex items-center gap-2">
           <Link
             to="/feed"
-            className=" border
+            className=" border-2
               rounded-xl
               px-5
               py-2.5
@@ -90,7 +90,7 @@ const NavBar = () => {
 
           <Link
             to="/connections"
-            className=" border
+            className=" border-2
               rounded-xl
               px-5
               py-2.5
@@ -164,14 +164,15 @@ const NavBar = () => {
             >
               <li className="mb-2">
                 <p className="text-cyan-400 font-bold text-sm">
-                  {user.Fname} {user.Lname}
+                  {/* {user.Fname} {user.Lname} */}
+                  Profile Menu
                 </p>
               </li>
 
               <li>
                 <Link
                   to="/profile/view"
-                  className="rounded-xl hover:bg-white/10"
+                  className="rounded-xl text-gray-200 hover:bg-white/10 text-sm font-semibold"
                 >
                 Update Profile
                 </Link>
@@ -180,7 +181,7 @@ const NavBar = () => {
                <li>
                 <Link
                   to="/postfeed"
-                  className="rounded-xl hover:bg-white/10"
+                  className="rounded-xl text-gray-200 hover:bg-white/10 text-sm font-semibold"
                 >
                   Others Post
                 </Link>
@@ -189,7 +190,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/mypost"
-                  className="rounded-xl hover:bg-white/10"
+                  className="rounded-xl text-gray-200 hover:bg-white/10 text-sm font-semibold"
                 >
                   My Post
                 </Link>
@@ -198,7 +199,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/connections"
-                  className="rounded-xl hover:bg-white/10"
+                  className="rounded-xl text-gray-200 hover:bg-white/10 text-sm font-semibold"
                 >
                   Connections
                 </Link>
@@ -207,7 +208,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to="/request"
-                  className="rounded-xl hover:bg-white/10"
+                  className="rounded-xl text-gray-200 hover:bg-white/10 text-sm font-semibold"
                 >
                   Requests
                 </Link>
@@ -220,7 +221,7 @@ const NavBar = () => {
                     rounded-xl
                     text-red-500
                     hover:bg-red-500/20
-                    font-semibold
+                    text-sm font-semibold
                   "
                 >
                   Logout
@@ -234,7 +235,7 @@ const NavBar = () => {
                     rounded-xl
                     text-red-500
                     hover:bg-red-500/20
-                    font-semibold
+                    text-sm font-semibold
                   "
                 >
                   Delete Account

@@ -1,13 +1,14 @@
 
 import axios from "axios";
 import api from "../utils/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addRequest, removeRequest } from "../utils/requestSlice";
 
 const Requestpage = () => {
     const dispatch = useDispatch();
     const request = useSelector((store) => store.request);
+    const [loading, setLoading] = useState(true);
 
     const reviewRequest = async (status, _id) => {
         try {
@@ -33,6 +34,8 @@ const Requestpage = () => {
             dispatch(addRequest(res?.data?.data));
         } catch (err) {
             console.error(err);
+        }finally{
+            setLoading(false)
         }
     };
 
@@ -40,9 +43,18 @@ const Requestpage = () => {
         fetchRequest();
     }, []);
 
-    if (!request) return null;
+    
+    if (loading) {
+        
+        return(
+            <h2 className="text-center text-xl font-semibold mt-5 mb-5">
+        Loading the data...
+            </h2>
+        )
+        
+    }
 
-    if (request.length === 0) {
+    if (!request || request.length === 0) {
         return (
             <h1 className="text-center text-xl font-semibold mt-5 mb-5">
                 No Request Found
@@ -52,7 +64,7 @@ const Requestpage = () => {
 
     return (
         <div className="px-4 py-4">
-            <h2 className="text-center font-bold text-2xl mb-6">
+            <h2 className="text-center font-semibold text-2xl mb-6">
                 Total Requests
             </h2>
 

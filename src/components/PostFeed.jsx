@@ -38,8 +38,8 @@ const PostFeed = () => {
 
     if (loading) {
         return (
-            <div className="text-center mt-10">
-                Loading feed...
+            <div className="text-center mt-10 font-semibold">
+                Loading Posts...
             </div>
         );
     }

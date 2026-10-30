@@ -1,11 +1,12 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
 import { Link } from "react-router-dom";
 import api from "../utils/axios";
 const Connections = () => {
   const connection = useSelector((store) => store.connection);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -19,6 +20,8 @@ const Connections = () => {
       dispatch(addConnection(res?.data?.data));
     } catch (err) {
       console.error(err);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -26,9 +29,17 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connection) return null;
 
-  if (connection.length === 0) {
+  if (loading) {
+    return(
+      <h2 className="text-center font-semibold text-xl mt-5">
+        Connection is Loading...
+      </h2>
+    )
+    
+  }
+
+  if (!connection || connection.length === 0) {
     return (
       <h2 className="text-center font-semibold text-xl mt-5">
         No Connection Found
@@ -41,12 +52,12 @@ const Connections = () => {
 
       <h1 className="
         text-center
-        text-2xl
+        text-xl
         md:text-3xl
-        font-bold
+        font-semibold
         mb-6
       ">
-        Total Connections
+        Total Connection
       </h1>
 
       <div className="flex flex-col gap-5 items-center">
@@ -93,7 +104,7 @@ const Connections = () => {
                     sm:h-28
                     rounded-full
                     border-2
-                    border-white
+                    border-green-500
                     object-cover
                     flex
                   "
@@ -109,13 +120,13 @@ const Connections = () => {
                 sm:text-left
               ">
 
-                <h2 className="text-xl font-bold">
+                <h2 className="text-xl font-bold text-green-500">
                   {Fname + " " + Lname}
                 </h2>
 
                 {age && gender && (
-                  <p className="text-gray-400 mt-1">
-                    {age + ", " + gender}
+                  <p className="text-gray-200 mt-1 font-mono">
+                    {age + " Year, " + gender}
                   </p>
                 )}
 

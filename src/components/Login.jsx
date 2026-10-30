@@ -52,7 +52,7 @@ const Login = ({ onSignup }) => {
         }
       );
 
-      dispatch(addUser(res.data.data));
+      dispatch(addUser(res?.data?.data));
 
       toast.success("Login successful!");
 
