@@ -129,8 +129,8 @@ const Requestpage = () => {
                                 </h2>
 
                                 {age && gender && (
-                                    <p className="text-gray-400 mt-1">
-                                        {age + ", " + gender}
+                                    <p className="text-gray-300 mt-1">
+                                        {age + " Year, " + gender}
                                     </p>
                                 )}
 
@@ -144,7 +144,7 @@ const Requestpage = () => {
                                 className="
                   flex
                   sm:flex-col
-                  gap-3
+                  gap-4
                   w-full
                   sm:w-auto
                 "
@@ -155,6 +155,8 @@ const Requestpage = () => {
                     btn-primary
                     flex-1
                     sm:w-28
+                    p-2
+                    text-lg
                   "
                                     onClick={() =>
                                         reviewRequest("rejected", requests._id)
@@ -169,6 +171,8 @@ const Requestpage = () => {
                     btn-secondary
                     flex-1
                     sm:w-28
+                    p-2
+                    text-lg
                   "
                                     onClick={() =>
                                         reviewRequest("accepted", requests._id)

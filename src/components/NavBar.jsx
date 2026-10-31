@@ -34,10 +34,11 @@ const NavBar = () => {
     <div
       className="
         navbar
-        bg-[#020617]/85
+        bg-[#020617]/80
         backdrop-blur-xl
-        border-b
-        border-white/10
+        border-b-2
+        rounded-b-3xl
+        border-neutral-500
         px-3
         sm:px-5
         sticky

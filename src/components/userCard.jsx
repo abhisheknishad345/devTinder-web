@@ -55,7 +55,7 @@ const UserCard = ({ newUser }) => {
             sm:w-36
             sm:h-36
             object-cover
-            border-4
+            border-3
             border-green-500
             rounded-full
             shadow-lg
@@ -123,7 +123,7 @@ const UserCard = ({ newUser }) => {
             flex-col
             sm:flex-row
             justify-center
-            gap-4
+            gap-5
             mt-6
           "
         >
@@ -133,12 +133,13 @@ const UserCard = ({ newUser }) => {
               btn-primary
               w-full
               sm:w-auto
-              text-base
+              text-lg
+              p-5
               sm:text-lg
             "
             onClick={() => handleFeed("ignored", _id)}
           >
-            Ignore
+            Skip
           </button>
 
           <button
@@ -147,12 +148,13 @@ const UserCard = ({ newUser }) => {
               btn-secondary
               w-full
               sm:w-auto
-              text-base
+              text-lg
+              p-3
               sm:text-lg
             "
             onClick={() => handleFeed("interested", _id)}
           >
-            Interested
+            Send Request
           </button>
         </div>
       </div>

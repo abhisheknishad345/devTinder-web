@@ -52,7 +52,7 @@ const Home = () => {
     <div className="min-h-screen bg-black text-neutral-200">
       {/* GUEST NAVBAR */}
       {!isLoggedIn && (
-        <nav className="sticky top-0 z-50 border-b border-neutral-500 bg-neutral-950">
+        <nav className="sticky top-0 z-50 border-b-2 rounded-3xl border-neutral-500 bg-neutral-950">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
             <button
               onClick={() => navigate("/")}
