@@ -118,7 +118,7 @@ const Post = ({ onPostCreated }) => {
 
     return (
         <div className="rounded-xl shadow p-4">
-            <h1 className="font-medium font-mono text-2xl capitalize mb-2 text-pink-400">Post your thought</h1>
+            <h1 className="font-medium font-mono text-xl capitalize mb-2 text-gray-400">Post your thought</h1>
 
             <form onSubmit={handleSubmit}>
 
@@ -182,7 +182,6 @@ const Post = ({ onPostCreated }) => {
                         />
 
                     </label>
-                     <p className="text-green-500">Image up to 4 MB</p>
 
 
                     {/* Post button */}
@@ -195,6 +194,7 @@ const Post = ({ onPostCreated }) => {
                     </button>
 
                 </div>
+                     <p className="text-green-500 mt-4">*Image up to 4 MB</p>
 
             </form>
 
