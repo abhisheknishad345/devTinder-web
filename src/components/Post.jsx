@@ -1,7 +1,9 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../utils/axios";
 import {Camera, X} from "lucide-react"
+
+const MAX_IMAGE_SIZE = 4 * 1024 * 1024; // 4 MB
 
 
 const Post = ({ onPostCreated }) => {
@@ -10,12 +12,34 @@ const Post = ({ onPostCreated }) => {
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+     useEffect(() => {
+        return () => {
+            if (preview) {
+                URL.revokeObjectURL(preview);
+            }
+        };
+    }, [preview]);
 
     const handleImageChange = (e) => {
 
         const file = e.target.files[0];
 
         if (!file) return;
+        setError("");
+
+        if (!file.type.startsWith("image/")) {
+            setError("Please select a valid image.");
+            e.target.value = "";
+            return;
+        }
+
+         if (file.size > MAX_IMAGE_SIZE) {
+            setError("Image size should not exceed 4 MB.");
+            e.target.value = "";
+            return;
+        }
 
         setImage(file);
 
@@ -28,6 +52,7 @@ const Post = ({ onPostCreated }) => {
 
         setImage(null);
         setPreview(null);
+        setError("");
     };
 
 
@@ -42,6 +67,7 @@ const Post = ({ onPostCreated }) => {
         try {
 
             setLoading(true);
+            setError("")
 
             const formData = new FormData();
 
@@ -67,11 +93,19 @@ const Post = ({ onPostCreated }) => {
             setImage(null);
             setPreview(null);
 
+             e.target.reset();
+
         } catch (err) {
 
             console.log(
                 "Error creating post:",
                 err.response?.data || err.message
+            );
+
+             setError(
+                err.response?.status === 413
+                    ? "Image is too large. Please select an image under 4 MB."
+                    : "Unable to create post. Please try again."
             );
 
         } finally {
@@ -120,12 +154,19 @@ const Post = ({ onPostCreated }) => {
                     </div>
                 )}
 
+                 {error && (
+                    <p className="text-red-500 text-lg mt-2">
+                        {error}
+                    </p>
+                )}
+
+
 
                 {/* Bottom section */}
                 <div className="flex items-center justify-between mt-4">
 
                     {/* Image button */}
-                    <label className="cursor-pointer flex items-center gap-2 hover:text-pink-400">
+                    <label className="cursor-pointer text-pink-500 flex items-center gap-2 hover:text-pink-400">
 
                         <Camera size={22}/>
                         <span>
@@ -141,6 +182,7 @@ const Post = ({ onPostCreated }) => {
                         />
 
                     </label>
+                     <p className="text-green-500">Image up to 4 MB</p>
 
 
                     {/* Post button */}

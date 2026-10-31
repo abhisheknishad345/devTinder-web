@@ -183,7 +183,7 @@ const Home = () => {
       </section>
 
       {/* WHY DEVTINDER */}
-      <section id="why" className="border-t border-neutral-800 px-5 py-15 lg:px-8">
+      <section id="why" className="border-t border-neutral-500 px-5 py-15 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">Why DevTinder</p>
@@ -216,7 +216,7 @@ const Home = () => {
       </section>
 
       {/* FEATURED DEVELOPERS */}
-      <section id="developers" className="border-t border-neutral-800 px-5 py-15 lg:px-8">
+      <section id="developers" className="border-t border-neutral-500 px-5 py-15 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
@@ -272,7 +272,7 @@ const Home = () => {
       </section>
 
       {/* FIND YOUR MATCH */}
-      <section className="border-t border-neutral-800 px-5 py-15 lg:px-8">
+      <section className="border-t border-neutral-500 px-5 py-15 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">Find Your Match</p>
@@ -309,7 +309,7 @@ const Home = () => {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="border-t border-neutral-800 px-5 py-15 lg:px-8">
+      <section id="how" className="border-t border-neutral-500 px-5 py-15 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">How It Works</p>
@@ -336,7 +336,7 @@ const Home = () => {
 
       {/* COMMUNITY STATS */}
       <section className="px-5 pb-24 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-2xl border border-neutral-800 bg-neutral-900 p-10 md:p-14">
+        <div className="mx-auto max-w-7xl rounded-2xl border border-neutral-500 bg-neutral-900 p-10 md:p-14">
           <div className="grid gap-10 md:grid-cols-4">
             {[
               ["1,240+", "Developers"],
@@ -356,7 +356,7 @@ const Home = () => {
       {/* JOIN CTA */}
       {!isLoggedIn && (
         <section className="px-5 pb-24 lg:px-8">
-          <div className="mx-auto max-w-5xl rounded-2xl border border-neutral-800 bg-neutral-900 px-7 py-20 text-center">
+          <div className="mx-auto max-w-5xl rounded-2xl border border-neutral-500 bg-neutral-900 px-7 py-20 text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">Join DevTinder</p>
             <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold sm:text-5xl">
               Ready to find your dev tribe?
