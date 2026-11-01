@@ -111,11 +111,7 @@ const Feed = () => {
         <UserCard newUser={feed[0]} />
         
       </div>
-      <ToastContainer 
-      position="top-center"
-      autoClose={1500}
-      theme="dark"
-      />
+     
     </div>
   );
 };

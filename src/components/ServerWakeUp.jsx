@@ -59,7 +59,7 @@ const ServerWakeUp = ({ children }) => {
                     DevTinder
                 </h1>
 
-                <p className="text-red-500 mt-4">
+                <p className="text-red-500 text-lg mt-4">
                     Unable to connect to the server.
                 </p>
 
