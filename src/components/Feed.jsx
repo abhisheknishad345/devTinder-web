@@ -48,11 +48,12 @@ const Feed = () => {
 
         <h2
           className="
-            text-2xl
+            text-md
             md:text-3xl
             font-semibold
             text-center
             mb-8
+            text-white/85
           "
         >
           Feed is Loading...
@@ -90,12 +91,13 @@ const Feed = () => {
     >
       <h2
         className="
-          text-xl
+          text-lg
           md:text-3xl
           font-semibold
           text-center
           mb-2
-          text-teal-500
+          mt-3
+          text-white/85
         "
       >
         Suggested Feed

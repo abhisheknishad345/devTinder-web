@@ -3,6 +3,7 @@ import io from "socket.io-client";
 
 export const createSocketConnection = () => {
   const SERVER_URL = window.location.origin;
+  console.log(SERVER_URL);
 
   return io(SERVER_URL, {
     withCredentials: true,
